@@ -20,11 +20,11 @@ class Action
     }
     public function run()
     {
-        $_m = isset($_GET['m']) ? $_GET['m'] : 'Index';
+        $_m = isset($_GET['m']) ? $_GET['m'] : 'index';
         method_exists($this, $_m) ? eval('$this->' . $_m . '();') : exit($_m . '方法不存在！');
     }
 
-
+    
 }
 
 

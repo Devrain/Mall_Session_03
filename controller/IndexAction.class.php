@@ -15,8 +15,9 @@ class IndexAction extends Action
 
     public function index()
     {
+        new UserModel();
         $this->_tpl->assign('name', '首頁');
-        $this->_tpl->display(SMARTY_STYLE . 'details.tpl');
+        $this->_tpl->display(SMARTY_STYLE . 'index.tpl');
     }
 
     public function add()
