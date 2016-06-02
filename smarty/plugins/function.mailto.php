@@ -16,9 +16,9 @@
  *           encode them.<br>
  * Input:<br>
  *         - address = e-mail address
- *         - text = (optional) text to display, admin is address
+ *         - text = (optional) text to display, default is address
  *         - encode = (optional) can be one of:
- *                * none : no encoding (admin)
+ *                * none : no encoding (default)
  *                * javascript : encode with javascript
  *                * javascript_charcode : encode with javascript charcode
  *                * hex : encode with hexidecimal (no javascript)
