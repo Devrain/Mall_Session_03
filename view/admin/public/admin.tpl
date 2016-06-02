@@ -41,6 +41,12 @@
         <dd><a href="###">會員2</a></dd>
         <dd><a href="###">會員3</a></dd>
     </dl>
+    <dl style="display: none;">
+        <dt>系統</dt>
+        <dd><a href="?a=manege" target="in">管理員列表</a></dd>
+        <dd><a href="###">系統2</a></dd>
+        <dd><a href="###">系統3</a></dd>
+    </dl>
 </div>
 
 <div id="main">

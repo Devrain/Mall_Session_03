@@ -6,7 +6,7 @@
  * Time: 16:17
  */
  
-//  管理員控制器
+//  後臺控制器
 class AdminAction extends Action
 {
     public function __construct()
