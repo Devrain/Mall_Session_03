@@ -14,4 +14,3 @@ class ManageModel extends Model {
 		parent::add();
 	}
 }
-?>

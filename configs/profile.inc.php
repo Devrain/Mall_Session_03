@@ -14,7 +14,7 @@ define('SMARTY_COMPILE_DIR', ROOT_PATH . '/compile/');
 define('SMARTY_TEMPLATE_DIR', ROOT_PATH . '/view/');
 define('SMARTY_CONFIG_DIR', ROOT_PATH . '/configs/');
 define('SMARTY_CACHE_DIR', ROOT_PATH . '/cache/');
-define('SMARTY_CACHING', 1);
+define('SMARTY_CACHING', 0);
 define('SMARTY_CACHE_LIFETIME', 60 * 60 * 24);
 define('SMARTY_LEFT_DELIMITER', '{');
 define('SMARTY_RIGHT_DELIMITER', '}');

@@ -64,6 +64,7 @@ html{
     background: #ffffff;
     border: 1px solid #333;
     width: 80%;
+	margin:10px auto;
     padding:10px;
 }
 
@@ -72,7 +73,13 @@ html{
     font-weight: bold;
     height: 20px;
     line-height: 20px;
-    background: url("../images/nav2.gif") no-repeat 15px 5px;
+	background:url(../images/nav1.gif) no-repeat left 5px;
+	padding:0 0 0 15px;
+}
+#sidebar dl dd {
+	height:20px;
+	line-height:20px;
+	background:url(../images/nav2.gif) no-repeat 15px 5px;
     padding: 0 0 0 30px;
 
 }
@@ -82,7 +89,6 @@ html{
 }
 #main {
     float: right;
-    background: orange;
 }
 
 #main iframe{
