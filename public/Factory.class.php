@@ -12,7 +12,9 @@ class Factory
 
     static public function setAction()
     {
-        eval('self::$_action = new ' . ucfirst(isset($_GET['a']) ? $_GET['a'] : 'index') . 'Action();');
+        $_a = isset($_GET['a']) ? $_GET['a'] : 'index';
+        if (!file_exists(ROOT_PATH.'/controller/'.$_a.'Action.class.php')) $_a = 'index';
+        eval('self::$_action = new ' . ucfirst($_a) . 'Action();');
         return self::$_action;
     }
 
