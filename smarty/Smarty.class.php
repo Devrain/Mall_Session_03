@@ -313,12 +313,12 @@ class Smarty
     /**
      * This is the resource type to be used when not specified
      * at the beginning of the resource path. examples:
-     * $smarty->display('file:index.tpl');
-     * $smarty->display('db:index.tpl');
-     * $smarty->display('index.tpl'); // will use default resource type
-     * {include file="file:index.tpl"}
-     * {include file="db:index.tpl"}
-     * {include file="index.tpl"} {* will use default resource type *}
+     * $smarty->display('file:details.tpl');
+     * $smarty->display('db:details.tpl');
+     * $smarty->display('details.tpl'); // will use default resource type
+     * {include file="file:details.tpl"}
+     * {include file="db:details.tpl"}
+     * {include file="details.tpl"} {* will use default resource type *}
      *
      * @var array
      */
