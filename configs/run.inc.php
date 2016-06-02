@@ -6,6 +6,9 @@
  * Time: 22:43
  */
 
+//  定義錯誤級別
+error_reporting(E_ALL);
+
 //  創建一個實際路徑
 define('ROOT_PATH', substr(dirname(__FILE__), 0, -8));
 //  引入系統配置文件

@@ -13,7 +13,8 @@ class ManageAction extends Action
 {
     public function __construct()
     {
-        parent::__construct();
+        parent::__construct(new ManageModel());
+
 
     }
 
@@ -27,6 +28,7 @@ class ManageAction extends Action
     //  添加管理員
     public function add()
     {
+        if (isset($_POST['send'])) $this->_model->add(Request::getInstance());
         $this->_tpl->display(SMARTY_ADMIN . 'manage/add.tpl');
     }
 

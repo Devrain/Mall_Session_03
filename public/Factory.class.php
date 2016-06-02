@@ -12,8 +12,8 @@ class Factory
 
     static public function setAction()
     {
-        $_a = isset($_GET['a']) ? $_GET['a'] : 'index';
-        if (!file_exists(ROOT_PATH.'/controller/'.$_a.'Action.class.php')) $_a = 'index';
+        $_a = isset($_GET['a']) ? $_GET['a'] : 'Index';
+        if (!file_exists(ROOT_PATH . '/controller/' . $_a . 'Action.class.php')) $_a = 'Index';
         eval('self::$_action = new ' . ucfirst($_a) . 'Action();');
         return self::$_action;
     }

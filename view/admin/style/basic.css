@@ -14,7 +14,7 @@ ul {
     list-style-type: none;
 }
 
-h2 {
+h2, dl.form {
     border: 1px solid #bbdde5;
     background: #f4fafb;
     font-size: 14px;
@@ -38,6 +38,33 @@ h2 a:hover {
     color: #f60;
     text-decoration: underline;
 }
+
+dl.form{
+    font-size: 12px;
+}
+dl.form dd {
+    padding: 4px 0;
+    
+}
+
+dl.form input.text {
+    border: 1px solid #666;
+    background: #fff;
+    height: 18px;
+    
+}
+dl.form select {
+    border: 1px solid #666;
+    background: #fff;
+    height: 22px;
+    
+}
+dl.form input.submit{
+    cursor: pointer;
+}
+
+
+
 
 #list {
     margin: 0 10px;

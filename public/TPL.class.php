@@ -40,7 +40,7 @@ class TPL extends Smarty
         //是否开启缓存，网站开发调试阶段，我们应该关闭缓存
         $this->caching = SMARTY_CACHING;
         //缓存的声明周期
-        $this->cache_lifetime = SAMRTY_CACHE_LIFETIME;
+        $this->cache_lifetime = SMARTY_CACHE_LIFETIME;
         //左定界符
         $this->left_delimiter = SMARTY_LEFT_DELIMITER;
         //右定界符
