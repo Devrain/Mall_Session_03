@@ -17,12 +17,12 @@ class AdminAction extends Action
     //  後臺初始頁面
     public function index()
     {
-        $this->_tpl->display(SMARTY_STYLE . 'admin.tpl');
+        $this->_tpl->display(SMARTY_ADMIN . 'public/admin.tpl');
     }
 
     //  起始頁
     public function main()
     {
-        $this->_tpl->display(SMARTY_STYLE . 'admin_main.tpl');
+        $this->_tpl->display(SMARTY_ADMIN . 'public/main.tpl');
     }
 }

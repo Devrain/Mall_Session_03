@@ -17,7 +17,7 @@ class IndexAction extends Action
     {
 
         $this->_tpl->assign('name', '首頁');
-        $this->_tpl->display(SMARTY_STYLE . 'index.tpl');
+        $this->_tpl->display(SMARTY_FRONT . 'public/index.tpl');
     }
 
 

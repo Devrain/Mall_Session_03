@@ -33,8 +33,7 @@ class DB
     private function __construct()
     {
         try {
-            $this->_pdo = new PDO('mysql:host=localhost;dbname=mall', 'root', 'root', array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES UTF8'
-            ));
+            $this->_pdo = new PDO(DB_DNS, DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES ' . DB_CHARSET));
         } catch (PDOException $e) {
             exit($e->getMessage());
         }

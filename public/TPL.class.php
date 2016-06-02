@@ -30,21 +30,21 @@ class TPL extends Smarty
     private function setConfigs()
     {
         //模板目录
-        $this->template_dir = ROOT_PATH . '/view/';
+        $this->template_dir = SMARTY_TEMPLATE_DIR;
         //编译目录
-        $this->compile_dir = ROOT_PATH . '/compile/';
+        $this->compile_dir = SMARTY_COMPILE_DIR;
         //配置变量目录
-        $this->config_dir = ROOT_PATH . '/configs/';
+        $this->config_dir = SMARTY_CONFIG_DIR;
         //缓存目录
-        $this->cache_dir = ROOT_PATH . '/cache/';
+        $this->cache_dir = SMARTY_CACHE_DIR;
         //是否开启缓存，网站开发调试阶段，我们应该关闭缓存
-        $this->caching = 0;
+        $this->caching = SMARTY_CACHING;
         //缓存的声明周期
-        $this->cache_lifetime = 60 * 60 * 24;
+        $this->cache_lifetime = SAMRTY_CACHE_LIFETIME;
         //左定界符
-        $this->left_delimiter = '{';
+        $this->left_delimiter = SMARTY_LEFT_DELIMITER;
         //右定界符
-        $this->right_delimiter = '}';
+        $this->right_delimiter = SMARTY_RIGHT_DELIMITER;
     }
 }
 

@@ -5,10 +5,10 @@
     <title>在綫商城後臺管理</title>
 
 
-    <link rel="stylesheet" href="view/default/style/basic.css">
-    <link rel="stylesheet" href="view/default/style/admin.css">
-    <script type="text/javascript" src="view/default/js/iframe.js"></script>
-    <script type="text/javascript" src="view/default/js/channel.js"></script>
+    <link rel="stylesheet" href="view/admin/style/basic.css">
+    <link rel="stylesheet" href="view/admin/style/admin.css">
+    <script type="text/javascript" src="view/admin/js/iframe.js"></script>
+    <script type="text/javascript" src="view/admin/js/channel.js"></script>
 </head>
 <body>
 <div id="header">

@@ -12,8 +12,9 @@ class Model extends DB
 {
     protected $_db;
 
-    protected function __construct()
+    public function __construct()
     {
-        $this->_db = parent::getInstance();
+//        $this->_db = parent::getInstance();
+        var_dump($this->_db);
     }
 }
