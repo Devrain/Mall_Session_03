@@ -8,21 +8,39 @@
     <link rel="stylesheet" href="view/default/style/basic.css">
     <link rel="stylesheet" href="view/default/style/admin.css">
     <script type="text/javascript" src="view/default/js/iframe.js"></script>
+    <script type="text/javascript" src="view/default/js/channel.js"></script>
 </head>
 <body>
 <div id="header">
     <p>您好，admin【超級管理員】【去首頁】【退出】</p>
     <ul>
         <li class="first"><a href="?a=admin&m=main" target="in">起始頁</a></li>
-        <li ><a href="###">商品</a></li>
-        <li ><a href="###">訂單</a></li>
-        <li ><a href="###">會員</a></li>
-        <li ><a href="###">系統</a></li>
+        <li><a href="javascript:channel(0)" )>商品</a></li>
+        <li><a href="javascript:channel(1)">訂單</a></li>
+        <li><a href="javascript:channel(2)">會員</a></li>
+        <li><a href="javascript:channel(3)">系統</a></li>
     </ul>
 </div>
 
 <div id="sidebar">
-    sidebar
+    <dl style="display: block">
+        <dt>商品</dt>
+        <dd><a href="###">商品1</a></dd>
+        <dd><a href="###">商品2</a></dd>
+        <dd><a href="###">商品3</a></dd>
+    </dl>
+    <dl style="display: none;">
+        <dt>訂單</dt>
+        <dd><a href="###">訂單1</a></dd>
+        <dd><a href="###">訂單2</a></dd>
+        <dd><a href="###">訂單3</a></dd>
+    </dl>
+    <dl style="display: none;">
+        <dt>會員</dt>
+        <dd><a href="###">會員1</a></dd>
+        <dd><a href="###">會員2</a></dd>
+        <dd><a href="###">會員3</a></dd>
+    </dl>
 </div>
 
 <div id="main">

@@ -10,7 +10,7 @@
 window.onload = function () {
     (window.onresize = function () {
         //  獲取可見寬度
-        var width = document.documentElement.clientWidth - 200;
+        var width = document.documentElement.clientWidth - 180;
         //  獲取可見高度
         var height = document.documentElement.clientHeight - 80;
         //  如果有寬度給值
