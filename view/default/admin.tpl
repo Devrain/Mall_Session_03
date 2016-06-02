@@ -7,12 +7,13 @@
 
     <link rel="stylesheet" href="view/default/style/basic.css">
     <link rel="stylesheet" href="view/default/style/admin.css">
+    <script type="text/javascript" src="view/default/js/iframe.js"></script>
 </head>
 <body>
 <div id="header">
     <p>您好，admin【超級管理員】【去首頁】【退出】</p>
     <ul>
-        <li class="first"><a href="###">起始頁</a></li>
+        <li class="first"><a href="?a=admin&m=main" target="in">起始頁</a></li>
         <li ><a href="###">商品</a></li>
         <li ><a href="###">訂單</a></li>
         <li ><a href="###">會員</a></li>
@@ -25,7 +26,7 @@
 </div>
 
 <div id="main">
-    main
+    <iframe src="?a=admin&m=main" name="in" frameborder="0"></iframe>
 </div>
 </body>
 </html>

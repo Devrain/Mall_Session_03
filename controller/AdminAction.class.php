@@ -19,4 +19,10 @@ class AdminAction extends Action
     {
         $this->_tpl->display(SMARTY_STYLE . 'admin.tpl');
     }
+
+    //  起始頁
+    public function main()
+    {
+        $this->_tpl->display(SMARTY_STYLE . 'admin_main.tpl');
+    }
 }
