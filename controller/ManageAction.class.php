@@ -13,7 +13,7 @@ class ManageAction extends Action
 {
     public function __construct()
     {
-        parent::__construct(Factory::setModel(),Factory::setCheck());
+        parent::__construct(Factory::setModel());
 
 
     }
@@ -21,7 +21,8 @@ class ManageAction extends Action
     //  管理員列表
     public function index()
     {
-        $this->_tpl->display(SMARTY_ADMIN . 'manage/manage.tpl');
+        $this->_tpl->assign('AllManage', $this->_model->findAll());
+        $this->_tpl->display(SMARTY_ADMIN . 'manage/show.tpl');
 
     }
 

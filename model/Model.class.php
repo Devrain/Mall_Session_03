@@ -15,22 +15,27 @@ class Model extends DB
     protected $_check = null;
     protected $_request = null;
 
-    protected function __construct(&$_model,&$_check)
+    protected function __construct(&$_model,&$_check,$_tables)
     {
-        $this->_db = parent::getInstance();
+        $this->_db = parent::getInstance($_tables);
 //        var_dump($this->_db);
         $this->_check = $_check;
         $this->_request = Request::getInstance($_model, $_check);
     }
 
-    protected function add($_addData,$_tables)
+    protected function add($_addData)
     {
-        return $this->_db->add($_addData,$_tables);
+        return $this->_db->add($_addData);
     }
 
-    protected function isOne($_where, $_tables)
+    protected function isOne($_where)
     {
-        return $this->_db->isOne($_where, $_tables);
+        return $this->_db->isOne($_where);
+    }
+
+    protected function select($_fields)
+    {
+        return $this->_db->select($_fields);
     }
 
 }

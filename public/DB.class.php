@@ -10,14 +10,18 @@ class DB
 {
     //  PDO對象
     private $_pdo = null;
+    //  数据表
+    private $_tables = array();
+
     //  用於存放實例化對象
     static private $_instance = null;
 
     //  公共靜態方法獲取實例化對象
-    static protected function getInstance()
+    static protected function getInstance($_tables)
     {
         if (!(self::$_instance instanceof self)) {
             self::$_instance = new self();
+            self::$_instance->_tables = $_tables;
         }
         return self::$_instance;
     }
@@ -41,39 +45,53 @@ class DB
     }
 
     //  新增
-    protected function add($_addFields, $_tables)
+    protected function add($_addData)
     {
         //  先对数据转意
 //        $_addData = Tool::setFormString($_addData);
         $_addFields = array();
         $_addValues = array();
-        foreach ($_addFields as $_index => $_item) {
+        foreach ($_addData as $_index => $_item) {
             $_addFields[] = $_index;
-            $_addValues = $_item;
+            $_addValues[] = $_item;
         }
 
         $_addFields = implode(',', $_addFields);
         $_addValues = implode("','", $_addValues);
-        
-        $_sql = "INSERT INTO $_tables[0] ($_addFields) VALUES ('$_addValues')";
-        return $this->execute($_sql);
+
+        $_sql = "INSERT INTO {$this->_tables[0]} ($_addFields) VALUES ('$_addValues')";
+        return $this->execute($_sql)->rowCount();
     }
 
 
     //  验证一条数据
-    protected function isOne($_where, $_tables)
+    protected function isOne($_where)
     {
         $_isAnd = '';
         foreach ($_where as $_index => $_item) {
             $_isAnd .= "$_index='$_item' AND ";
         }
         $_isAnd = substr($_isAnd, 0, -4);
-        $_sql = "SELECT id FROM $_table[0] WHERE $_isAnd LIMIT 1";
-        return $this->execute($_sql);
+        $_sql = "SELECT id FROM {$this->_tables[0]} WHERE $_isAnd LIMIT 1";
+        return $this->execute($_sql)->rowCount();
 
 
     }
-    
+
+
+    //  查询
+    protected function select($_field)
+    {
+        $_selectField = implode(',', $_field);
+        $_sql = "SELECT $_selectField FROM {$this->_tables[0]}";
+        $_stmt = $this->execute($_sql);
+        $_result = array();
+        while (!!$_objs=$_stmt->fetchObject()){
+            $_result[] = $_objs;
+        }
+        return Tool::setHtmlString($_result);
+    }
+
 
 
     /**
@@ -84,10 +102,10 @@ class DB
     {
         $_stmt = $this->_pdo->prepare($_sql);
         $_stmt->execute();
-        return $_stmt->rowCount();
-        
+        return $_stmt;
+
     }
 
-    
+
 }
 

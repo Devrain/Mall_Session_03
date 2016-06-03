@@ -26,7 +26,8 @@ class Factory
         $_a = self::getAction();
         if (file_exists(ROOT_PATH.'/model/'.$_a.'Model.class.php')) {
             eval('self::$_obj = new ' . ucfirst($_a) . 'Model();');
-        } 
+        }
+        return self::$_obj;
     }
     
     static public function setCheck()

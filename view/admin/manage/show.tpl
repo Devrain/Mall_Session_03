@@ -12,20 +12,26 @@
     <table>
         <tr>
             <th>用戶名</th>
-            <th>登陸</th>
+            <th>等级</th>
             <th>登陸次數</th>
             <th>最後登陸ip</th>
             <th>最後登陸時間</th>
             <th>操作</th>
         </tr>
-        <tr>
-            <td>用戶名</td>
-            <td>登陸</td>
-            <td>登陸次數</td>
-            <td>最後登陸ip</td>
-            <td>最後登陸時間</td>
-            <td><img src="view/admin/images/drop.gif" alt="刪除" title="刪除"></td>
-        </tr>
+        {foreach from=$AllManage key=index item=value}
+            <tr>
+                <td>{$value->user}</td>
+                <td>{$value->level}</td>
+                <td>{$value->login_count}</td>
+                <td>{$value->last_ip}</td>
+                <td>{$value->last_time}</td>
+                <td>
+                    <img src="view/admin/images/edit.gif" alt="编辑" title="编辑" />
+                    <img src="view/admin/images/drop.gif" alt="删除" title="删除" />
+                </td>
+            </tr>
+        {/foreach}
+
         
     </table>
 </div>

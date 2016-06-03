@@ -41,6 +41,27 @@ class Tool
 
     }
 
+    //  html过滤
+    static public function setHtmlString($_data)
+    {
+
+        if (is_array($_data)) {
+            foreach ($_data as $_index => $_item) {
+                $_string[$_index] = self::setHtmlString($_item);
+            }
+        } elseif (is_object($_data)) {
+            foreach ($_data as $_index => $_item) {
+
+                $_string->$_index = self::setHtmlString($_item);
+
+
+            }
+        } else {
+            $_string = htmlspecialchars($_data);
+        }
+        return $_string;
+    }
+
     //  获取上一页
     static public function getPrevPage()
     {

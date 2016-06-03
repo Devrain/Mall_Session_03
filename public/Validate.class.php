@@ -28,7 +28,7 @@ class Validate
     }
 
     //  判断字符串是否为空
-    static public function inNullString($_string)
+    static public function isNullString($_string)
     {
         return empty($_string) ? true : false;
     }
