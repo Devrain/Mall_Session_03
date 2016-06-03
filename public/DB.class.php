@@ -41,13 +41,15 @@ class DB
     }
 
     //  新增
-    protected function add($_addData,$_tables)
+    protected function add($_addFields, $_tables)
     {
-        $_addData = array();
+        //  先对数据转意
+//        $_addData = Tool::setFormString($_addData);
+        $_addFields = array();
         $_addValues = array();
-        foreach ($_addData as $_index => $_item) {
+        foreach ($_addFields as $_index => $_item) {
             $_addFields[] = $_index;
-            $_addValues9 = $_item;
+            $_addValues = $_item;
         }
 
         $_addFields = implode(',', $_addFields);

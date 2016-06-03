@@ -6,7 +6,7 @@
  * Time: 20:13
  */
  
-class Validata
+class Validate
 {
     //  判斷是否是數組
     static public function isArray($_array)
@@ -15,7 +15,7 @@ class Validata
     }
     
     //  判斷數組是否有元素
-    static public function isNull($_array)
+    static public function isNullArray($_array)
     {
         return count($_array) == 0 ? true : false;
         

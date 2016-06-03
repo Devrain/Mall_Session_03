@@ -38,9 +38,9 @@ class Request
     public function add($_fields)
     {
         $_addData = array();
-        if (Validata::isArray($_POST) && !Validata::isNull($_POST)) {
+        if (Validate::isArray($_POST) && !Validate::isNullArray($_POST)) {
             foreach ($_POST as $_key => $_value) {
-                if (Validata::inArray($_key, $_fields)) {
+                if (Validate::inArray($_key, $_fields)) {
                     $_addData[$_key] = $_value;
 
                 }
