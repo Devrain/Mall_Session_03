@@ -56,8 +56,38 @@ class DB
         $_addValues = implode("','", $_addValues);
         
         $_sql = "INSERT INTO $_tables[0] ($_addFields) VALUES ('$_addValues')";
+        return $this->execute($_sql);
+    }
+
+
+    //  验证一条数据
+    protected function isOne($_where, $_tables)
+    {
+        $_isAnd = '';
+        foreach ($_where as $_index => $_item) {
+            $_isAnd .= "$_index='$_item' AND ";
+        }
+        $_isAnd = substr($_isAnd, 0, -4);
+        $_sql = "SELECT id FROM $_table[0] WHERE $_isAnd LIMIT 1";
+        return $this->execute($_sql);
+
+
+    }
+    
+
+
+    /**
+     * @param $_sql
+     * 执行并且返回影响行数
+     */
+    private function execute($_sql)
+    {
         $_stmt = $this->_pdo->prepare($_sql);
         $_stmt->execute();
         return $_stmt->rowCount();
+        
     }
+
+    
 }
+

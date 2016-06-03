@@ -11,6 +11,8 @@ error_reporting(E_ALL);
 
 //  創建一個實際路徑
 define('ROOT_PATH', substr(dirname(__FILE__), 0, -8));
+//  设置时区
+date_default_timezone_get('Asia/Shanghai');
 //  引入系統配置文件
 require ROOT_PATH . '/configs/profile.inc.php';
 //  引入smarty

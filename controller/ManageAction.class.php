@@ -29,7 +29,7 @@ class ManageAction extends Action
     public function add()
     {
         //  检测post过来的参数
-        if (isset($_POST['send'])) $this->_model->add(Request::getInstance($this->_check));
+        if (isset($_POST['send'])) $this->_model->add(Request::getInstance($this->_model,$this->_check));
         $this->_tpl->display(SMARTY_ADMIN . 'manage/add.tpl');
     }
 

@@ -41,7 +41,10 @@ class Factory
     //  获取动作 如果没有就默认给Index控制器
     static public function getAction()
     {
-        return isset($_GET['a']) ? $_GET['a'] : 'Index';
+        if (isset($_GET['a']) && !empty($_GET['a'])) {
+            return $_GET['a'];
+        }
+        return "Index";
     }
 }
 
