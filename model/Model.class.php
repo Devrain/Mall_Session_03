@@ -11,6 +11,7 @@ class Model extends DB
 {
     protected $_db = null;
     protected $_fields = array();
+    protected $_tables = array();
 
     protected function __construct()
     {
@@ -18,8 +19,8 @@ class Model extends DB
 //        var_dump($this->_db);
     }
 
-    protected function add()
+    protected function add($_addData,$_tables)
     {
-        $this->_db->add();
+        return $this->_db->add($_addData,$_tables);
     }
 }

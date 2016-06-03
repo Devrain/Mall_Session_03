@@ -41,11 +41,21 @@ class DB
     }
 
     //  新增
-    protected function add()
+    protected function add($_addData,$_tables)
     {
+        $_addData = array();
+        $_addValues = array();
+        foreach ($_addData as $_index => $_item) {
+            $_addFields[] = $_index;
+            $_addValues9 = $_item;
+        }
 
-        $_sql = "INSERT INTO mall_manage (user,pass) VALUES ('admin', '123456')";
+        $_addFields = implode(',', $_addFields);
+        $_addValues = implode("','", $_addValues);
+        
+        $_sql = "INSERT INTO $_tables[0] ($_addFields) VALUES ('$_addValues')";
         $_stmt = $this->_pdo->prepare($_sql);
         $_stmt->execute();
+        return $_stmt->rowCount();
     }
 }

@@ -24,3 +24,4 @@ define('DB_DNS', 'mysql:host=localhost;dbname=mall');
 define('DB_USER', 'root');
 define('DB_PASS', 'root');
 define('DB_CHARSET', 'UTF8');
+define('DB_FREFIX', 'mall_');
