@@ -21,6 +21,7 @@ class ManageAction extends Action
     //  管理員列表
     public function index()
     {
+        parent::page($this->_model->total());
         $this->_tpl->assign('AllManage', $this->_model->findAll());
         $this->_tpl->display(SMARTY_ADMIN . 'manage/show.tpl');
 

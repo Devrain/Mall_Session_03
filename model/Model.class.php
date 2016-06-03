@@ -14,11 +14,11 @@ class Model extends DB
     protected $_tables = array();
     protected $_check = null;
     protected $_request = null;
+    protected $_limit = '';
 
     protected function __construct(&$_model,&$_check,$_tables)
     {
         $this->_db = parent::getInstance($_tables);
-//        var_dump($this->_db);
         $this->_check = $_check;
         $this->_request = Request::getInstance($_model, $_check);
     }
@@ -33,9 +33,21 @@ class Model extends DB
         return $this->_db->isOne($_where);
     }
 
-    protected function select($_fields)
+    protected function select($_field,$_param=array())
     {
-        return $this->_db->select($_fields);
+        return $this->_db->select($_field,$_param);
     }
+
+    protected function total()
+    {
+        return $this->_db->total();
+    }
+
+    public function setLimit($_limit)
+    {
+        $this->_limit = $_limit;
+
+    }
+
 
 }

@@ -13,8 +13,14 @@ class ManageModel extends Model
 
     public function findAll()
     {
-        return parent::select(array('user', 'level', 'login_count', 'last_ip', 'last_time'));
+        return parent::select(array('user', 'level', 'login_count', 'last_ip', 'last_time'),array('limit'=>$this->_limit));
     }
+
+    public function total()
+    {
+        return parent::total();
+    }
+
     public function add()
     {
         $_addData = $this->_request->add($this->_fields);
@@ -22,7 +28,7 @@ class ManageModel extends Model
         $_addData['last_ip'] = Tool::getIP();
         $_addData['reg_time'] = Tool::getDate();
         return parent::add($_addData);
-        
+
     }
 
     public function isOne($_where)

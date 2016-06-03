@@ -26,14 +26,19 @@
                 <td>{$value->last_ip}</td>
                 <td>{$value->last_time}</td>
                 <td>
-                    <img src="view/admin/images/edit.gif" alt="编辑" title="编辑" />
-                    <img src="view/admin/images/drop.gif" alt="删除" title="删除" />
+                    <img src="view/admin/images/edit.gif" alt="编辑" title="编辑"/>
+                    <img src="view/admin/images/drop.gif" alt="删除" title="删除"/>
                 </td>
+            </tr>
+            {foreachelse}
+            <tr>
+                <td colspan="6">没有管理员</td>
             </tr>
         {/foreach}
 
-        
+
     </table>
 </div>
+<div id="page">{$page}</div>
 </body>
 </html>

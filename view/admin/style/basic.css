@@ -95,6 +95,116 @@ dl.form input.submit{
 
 
 
+#page {
+    text-align: center;
+    padding: 10px;
+
+}
+
+#page a {
+    color: #335b64;
+    border: 1px solid #666666;
+    padding: 2px 5px;
+    margin: 0 2px;
+    text-decoration: none;
+}
+
+/*noinspection ALL,CssUnusedSymbol*/
+#page a:hover,#page span.me {
+    color: #ffffff;
+    border: 1px solid #335b64;
+    background: #335b64;
+    text-decoration: none;
+}
+
+/*noinspection ALL,CssUnusedSymbol*/
+#page span.disabled {
+    border: 1px solid #ccc;
+    padding: 2px 5px;
+    margin: 0 2px;
+    color: #cccccc;
+
+}
+
+/*noinspection ALL,CssUnusedSymbol*/
+#page span.me {
+    padding: 2px 5px;
+    margin: 0 2px;
+
+}
+
+/*noinspection ALL,CssUnusedSymbol*/
+#page select.select {
+    width: 120px;
+    background: #fff;
+    border: 1px solid #ccc;
+
+}
+
+#page select.select optgroup {
+    font-style: normal;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

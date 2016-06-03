@@ -25,3 +25,7 @@ define('DB_USER', 'root');
 define('DB_PASS', 'root');
 define('DB_CHARSET', 'UTF8');
 define('DB_FREFIX', 'mall_');
+
+
+//  系统参数设置
+define('PAGE_SIZE', 20);

@@ -80,19 +80,30 @@ class DB
 
 
     //  查询
-    protected function select($_field)
+    protected function select($_field, $_param = array())
     {
-        $_selectField = implode(',', $_field);
-        $_sql = "SELECT $_selectField FROM {$this->_tables[0]}";
+        $_limit = '';
+        if (Validate::isArray($_param) && !Validate::isNullArray($_param)) {
+            $_limit = isset($_param['limit']) ? $_param['limit'] : '';
+        }
+        $_selectFields = implode(',', $_field);
+        $_sql = "SELECT $_selectFields FROM {$this->_tables[0]} $_limit";
         $_stmt = $this->execute($_sql);
         $_result = array();
-        while (!!$_objs=$_stmt->fetchObject()){
+        while (!!$_objs = $_stmt->fetchObject()) {
             $_result[] = $_objs;
         }
         return Tool::setHtmlString($_result);
     }
 
 
+    //  总记录
+    protected function total()
+    {
+        $_sql = "SELECT COUNT(*) as count FROM {$this->_tables[0]}";
+        $_stmt = $this->execute($_sql);
+        return $_stmt->fetchObject()->count;
+    }
 
     /**
      * @param $_sql
