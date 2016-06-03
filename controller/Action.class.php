@@ -18,16 +18,16 @@ class Action
      */
     protected $_model = null;
 
-    protected $_check = null;
+    protected $_redirect = null;
 
     /**
      * Action constructor.
      */
-    protected function __construct(&$_check = null, &$_model = null)
+    protected function __construct( &$_model = null)
     {
         $this->_tpl = TPL::getInstance();
         $this->_model = $_model;
-        $this->_check = $_check;
+        $this->_redirect = Redirect::getInstance($this->_tpl);
     }
 
 

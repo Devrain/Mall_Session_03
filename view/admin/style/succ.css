@@ -1,0 +1,23 @@
+@charset "UTF-8";
+.succ {
+    border: 1px solid #bbdde5;
+    background: #eef8f9;
+    padding: 0 10px 10px 10px;
+    
+}
+
+.succ   p {
+    padding: 10px 0 0 0;
+    color: green;
+    
+}
+
+.succ p a {
+    text-decoration: none;
+    color: blue;
+}
+
+.succ p a :hover{
+    color: #ff6600;
+    text-decoration: underline;
+}

@@ -54,7 +54,7 @@ function checkUser() {
     ajax.swRequest({
         method: 'POST',
         sync: false,
-        url: '?a=manage&m=ajax',
+        url: '?a=manage&m=isUser',
         data: "user=" + user.value,
         success: function (msg) {
             if (msg == 1) {

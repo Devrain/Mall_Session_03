@@ -13,6 +13,8 @@ error_reporting(E_ALL);
 define('ROOT_PATH', substr(dirname(__FILE__), 0, -8));
 //  设置时区
 date_default_timezone_get('Asia/Shanghai');
+//  设置编码
+header('Content-Type:text/html;charset=utf-8');
 //  引入系統配置文件
 require ROOT_PATH . '/configs/profile.inc.php';
 //  引入smarty
@@ -27,9 +29,9 @@ function __autoload($_className)
     } elseif (substr($_className, -5) == 'Model') {
         require ROOT_PATH . '/model/' . $_className . '.class.php';
 
-    }elseif (substr($_className,-5)=='Check') {
+    } elseif (substr($_className, -5) == 'Check') {
         require ROOT_PATH . '/check/' . $_className . '.class.php';
-    }  else {
+    } else {
         require ROOT_PATH . '/public/' . $_className . '.class.php';
 
     }
