@@ -27,7 +27,7 @@ class Page
         $this->_page_size = $_page_size;
         $this->_page_num = ceil($this->_total / $this->_page_size);
         $this->_page = $this->setPage();
-        $this->_limit = "LIMIT" . ($this->_page - 1) * $this->_page_size . ",$this->_page_size";
+        $this->_limit = "LIMIT " . ($this->_page - 1) * $this->_page_size . ",$this->_page_size";
         $this->_url = $this->setUrl();
         $this->_both_num = 2;
 
