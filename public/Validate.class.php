@@ -26,4 +26,10 @@ class Validate
     {
         return in_array($_data, $_array) ? true : false;
     }
+    
+    //  判断字符串是否为空
+    static public function inNullString($_string)
+    {
+        return empty($_string) ? true : false;
+    }
 }

@@ -25,7 +25,9 @@ function __autoload($_className)
     } elseif (substr($_className, -5) == 'Model') {
         require ROOT_PATH . '/model/' . $_className . '.class.php';
 
-    } else {
+    }elseif (substr($_className,-5)=='Check') {
+        require ROOT_PATH . '/check/' . $_className . '.class.php';
+    }  else {
         require ROOT_PATH . '/public/' . $_className . '.class.php';
 
     }
