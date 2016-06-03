@@ -12,16 +12,17 @@
 
 <form action="?a=manage&m=add" method="post">
     <dl class="form">
-        <dd>用戶名: <input type="text" name="user" class="text"></dd>
-        <dd>密 碼: <input type="password" name="pass" class="text"></dd>
-        <dd>等 級: <select name="level" id="">
+        <dd>用戶名: <input type="text" name="user" class="text">(2-20之间)</dd>
+        <dd>密  碼: <input type="password" name="pass" class="text">(大于6位)</dd>
+        <dd>确认密碼: <input type="password" name="notpass" class="text"></dd>
+        <dd>等  級: <select name="level" id="">
                 <option value="0">--請選擇一個等級權限--</option>
                 <option value="1">超級管理員</option>
                 <option value="2">普通管理員</option>
                 <option value="3">商品發佈專員</option>
                 <option value="4">訂單處理專員</option>
 
-            </select></dd>
+            </select>（必须选择一个权限）</dd>
         <dd><input type="submit" value="新增管理員" class="submit" name="send"></dd>
     </dl>
 </form>

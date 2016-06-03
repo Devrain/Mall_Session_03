@@ -42,5 +42,10 @@ class Tool
 
     }
 
+    //  获取上一页
+    static public function getPrevPage()
+    {
+        return $_SERVER["HTTP_REFERER"];
+    }
 }
 
