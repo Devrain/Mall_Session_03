@@ -18,13 +18,16 @@ class Action
      */
     protected $_model = null;
 
+    protected $_check = null;
+
     /**
      * Action constructor.
      */
-    protected function __construct(&$_model = null)
+    protected function __construct(&$_check = null, &$_model = null)
     {
         $this->_tpl = TPL::getInstance();
         $this->_model = $_model;
+        $this->_check = $_check;
     }
 
 

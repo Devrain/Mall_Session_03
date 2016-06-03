@@ -38,4 +38,9 @@ class ManageAction extends Action
     {
         $this->_tpl->display(SMARTY_ADMIN . 'manage/update.tpl');
     }
+
+    public function ajax()
+    {
+        $this->_check->ajax($this->_model);
+    }
 }
