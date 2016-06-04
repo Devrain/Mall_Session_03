@@ -46,6 +46,27 @@ function addManage() {
 
 }
 
+function updateManage() {
+    var fm = document.update;
+    if (fm.pass.value.length < 6) {
+        alert('管理员密码不得小于6位');
+        fm.pass.focus();
+        return false;
+    }
+    if (fm.pass.value != fm.notpass.value) {
+        alert('管理员密码和确认密码必须一直');
+        fm.notpass.focus();
+        return false;
+    }
+    if (fm.level.value == 0) {
+        alert('管理员等级权限必须选择');
+        fm.level.focus();
+        return false;
+    }
+    return true;
+}
+
+
 
 function checkUser() {
     var user = document.getElementById('user');

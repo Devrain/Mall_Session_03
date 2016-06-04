@@ -5,12 +5,12 @@
     <title>Document</title>
     <link rel="stylesheet" href="view/admin/style/basic.css">
     <link rel="stylesheet" href="view/admin/style/manage.css">
+    <script type="text/javascript" src="view/admin/js/manage.js"></script>
 </head>
 <body>
 <h2><a href="?a=manage">返回管理員列表</a>系統--修改管理員</h2>
 
-<form action="?a=manage&m=update" method="post" name="update">
-    <input type="hidden" name="flag" id="flag"/>
+<form action="?a=manage&m=update&id={$OneManage[0]->id}" method="post" name="update">
     <dl class="form">
         <dd>用户名：{$OneManage[0]->user}</dd>
         <dd>密码：<input type="password" name="pass" id="" class="text">(大于6位)</dd>

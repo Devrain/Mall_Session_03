@@ -18,7 +18,8 @@ class ManageModel extends Model
 
     public function findOne()
     {
-        return parent::select(array('id', 'user', 'level'), array('where' => array('id' => '275'), 'limit' => '1'));
+        $_oneData = $this->_request->one($this->_fields);
+        return parent::select(array('id', 'user', 'level'), array('where' => $_oneData, 'limit' => '1'));
     }
 
     public function total()
@@ -36,6 +37,16 @@ class ManageModel extends Model
 
     }
 
+
+    public function update()
+    {
+        $_oneData = $this->_request->one($this->_fields);
+        $_updateData = $this->_request->update($this->_fields);
+        $_updateData['pass'] = sha1($_updateData['pass']);
+        return parent::update($_oneData, $_updateData);
+        
+    }
+    
     public function delete()
     {
         $_deleteData = $this->_request->delete($this->_fields);

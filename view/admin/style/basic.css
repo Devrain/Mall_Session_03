@@ -97,6 +97,16 @@ dl.form input.submit {
     background: #f4fafb;
 }
 
+#list table tr {
+    background: #f4fafb;
+
+}
+
+#list table tr:hover {
+    background: url("../images/th_bg.gif");
+
+}
+
 #page {
     text-align: center;
     padding: 10px;

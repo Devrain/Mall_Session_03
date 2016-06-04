@@ -64,6 +64,24 @@ class DB
     }
 
 
+    protected function update($_oneData, $_updateData)
+    {
+        $_isAnd = '';
+        foreach ($_oneData as $_index => $_item) {
+            $_isAnd .= "$_index='$_item' AND ";
+        }
+        $_isAnd = substr($_isAnd, 0, 4);
+        $_setData = '';
+        foreach ($_updateData as $_index => $_item) {
+            $_setData .= "$_index'$_item',";
+        }
+        $_setData = substr($_setData, 0, -1);
+        $_sql = "UPDATE {$this->_tables[0]} SET $_setData WHERE $_isAnd LIMIT 1";
+        return $this->execute($_sql)->rowCount();
+
+
+    }
+
     //  验证一条数据
     protected function isOne($_isOneData)
     {

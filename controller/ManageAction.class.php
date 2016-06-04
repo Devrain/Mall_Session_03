@@ -43,6 +43,7 @@ class ManageAction extends Action
     //  修改管理員
     public function update()
     {
+        if (isset($_POST['send'])) $this->_model->update() ? $this->_redirect->succ(Tool::getPrevPage(), '管理员修改成功！') : $this->_redirect->error('管理员修改失败');
         if (isset($_GET['id'])) {
             $this->_tpl->assign('OneManage', $this->_model->findOne());
             $this->_tpl->display(SMARTY_ADMIN . 'manage/update.tpl');

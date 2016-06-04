@@ -23,6 +23,11 @@ class Model extends DB
         $this->_request = Request::getInstance($this,$this->_check);
     }
 
+    public function update($_oneData, $_updateData)
+    {
+        return $this->_db->update($_oneData, $_updateData);
+    }
+
     protected function add($_addData)
     {
         return $this->_db->add($_addData);
@@ -37,6 +42,9 @@ class Model extends DB
     {
         return $this->_db->isOne($_isOneData);
     }
+
+
+
 
     protected function select($_field,$_param=array())
     {

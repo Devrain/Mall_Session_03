@@ -22,7 +22,7 @@ class Request
     private $_model = null;
 
     //  公共靜態方法獲取實例化對象
-    static public function getInstance(&$_model,&$_check)
+    static public function getInstance(&$_model, &$_check)
     {
         if (!(self::$_instance instanceof self)) {
             self::$_instance = new self();
@@ -51,22 +51,40 @@ class Request
     {
         $_addData = array();
         if (Validate::isArray($_POST) && !Validate::isNullArray($_POST)) {
-            if (!$this->_check->addCheck($this->_model,$_POST)) $this->_check;
+            if (!$this->_check->addCheck($this->_model, $_POST)) $this->_check;
             $_addData = $this->selectData($_POST, $_fields);
 
         }
         return $_addData;
     }
 
+    public function update($_fields)
+    {
+        $_updateData = array();
+        if (Validate::isArray($_POST) && !Validate::isNullArray($_POST)) {
+            if (!$this->_check->updateCheck($this->_model, $_POST)) $this->check();
+        }
+        return $_updateData;
+    }
 
+
+    public function one($_fields)
+    {
+        $_oneDate = array();
+        if (Validate::isArray($_GET) && !Validate::isNullArray($_GET)) {
+            $_oneDate = $this->selectData($_GET, $_fields);
+            if (!$this->_check->oneCheck($this->_model,$_oneDate)) $this->check();
+        }
+        return $_oneDate;
+    }
 
     //  处理删除数据请求
     public function delete($_fields)
     {
         $_deleteData = array();
-        if (Validate::isArray($_GET)&& !Validate::isNullArray($_GET)) {
+        if (Validate::isArray($_GET) && !Validate::isNullArray($_GET)) {
             $_deleteData = $this->selectData($_GET, $_fields);
-            if (!$this->_check->deleteCheck($this->_model,$_deleteData)) $this->check();
+            if (!$this->_check->deleteCheck($this->_model, $_deleteData)) $this->check();
         }
         return $_deleteData;
     }
@@ -79,7 +97,7 @@ class Request
     {
         $_selectData = array();
         foreach ($_requestData as $_index => $_item) {
-            if (Validate::inArray($_index,$_fields)) {
+            if (Validate::inArray($_index, $_fields)) {
                 $_selectData[$_index] = $_item;
             }
         }
