@@ -14,6 +14,10 @@ ul {
     list-style-type: none;
 }
 
+a img {
+    border: none;
+}
+
 h2, dl.form {
     border: 1px solid #bbdde5;
     background: #f4fafb;
@@ -39,32 +43,32 @@ h2 a:hover {
     text-decoration: underline;
 }
 
-dl.form{
+dl.form {
     font-size: 12px;
 }
+
 dl.form dd {
     padding: 4px 0;
-    
+
 }
 
 dl.form input.text {
     border: 1px solid #666;
     background: #fff;
     height: 18px;
-    
+
 }
+
 dl.form select {
     border: 1px solid #666;
     background: #fff;
     height: 22px;
-    
+
 }
-dl.form input.submit{
+
+dl.form input.submit {
     cursor: pointer;
 }
-
-
-
 
 #list {
     margin: 0 10px;
@@ -93,8 +97,6 @@ dl.form input.submit{
     background: #f4fafb;
 }
 
-
-
 #page {
     text-align: center;
     padding: 10px;
@@ -110,7 +112,8 @@ dl.form input.submit{
 }
 
 /*noinspection ALL,CssUnusedSymbol*/
-#page a:hover,#page span.me {
+
+#page a:hover, #page span.me {
     color: #ffffff;
     border: 1px solid #335b64;
     background: #335b64;

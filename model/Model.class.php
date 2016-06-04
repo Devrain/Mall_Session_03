@@ -28,9 +28,14 @@ class Model extends DB
         return $this->_db->add($_addData);
     }
 
-    protected function isOne($_where)
+    protected function delete($_deleteData)
     {
-        return $this->_db->isOne($_where);
+        return $this->_db->delete($_deleteData);
+    }
+
+    protected function isOne($_isOneData)
+    {
+        return $this->_db->isOne($_isOneData);
     }
 
     protected function select($_field,$_param=array())

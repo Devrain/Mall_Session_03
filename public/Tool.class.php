@@ -65,7 +65,8 @@ class Tool
     //  获取上一页
     static public function getPrevPage()
     {
-        return $_SERVER["HTTP_REFERER"];
+        return empty($_SERVER['HTTP_REFERER']) ? '###' : $_SERVER["HTTP_REFERER"];
+        
     }
 }
 

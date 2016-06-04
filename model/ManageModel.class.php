@@ -13,7 +13,7 @@ class ManageModel extends Model
 
     public function findAll()
     {
-        return parent::select(array('user', 'level', 'login_count', 'last_ip', 'last_time'),array('limit'=>$this->_limit));
+        return parent::select(array('id', 'user', 'level', 'login_count', 'last_ip', 'last_time'), array('limit' => $this->_limit, 'order' => 'ORDER BY reg_time DESC'));
     }
 
     public function total()
@@ -31,9 +31,16 @@ class ManageModel extends Model
 
     }
 
-    public function isOne($_where)
+    public function delete()
     {
-        return parent::isOne($_where);
+        $_deleteData =$this->_request->delete($this->_fields);
+        return parent::delete($_deleteData);
+    }
+
+
+    public function isOne($_isOneData)
+    {
+        return parent::isOne($_isOneData);
     }
 
     public function isUser()

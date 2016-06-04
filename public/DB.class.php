@@ -65,10 +65,10 @@ class DB
 
 
     //  验证一条数据
-    protected function isOne($_where)
+    protected function isOne($_isOneData)
     {
         $_isAnd = '';
-        foreach ($_where as $_index => $_item) {
+        foreach ($_isOneData as $_index => $_item) {
             $_isAnd .= "$_index='$_item' AND ";
         }
         $_isAnd = substr($_isAnd, 0, -4);
@@ -79,15 +79,31 @@ class DB
     }
 
 
+    //  删除
+    protected function delete($_deleteData)
+    {
+        $_isAnd = '';
+        foreach ($_deleteData as $_index => $_item) {
+            $_isAnd .= "$_index='$_item' AND ";
+        }
+        $_isAnd = substr($_isAnd, 0, -4);
+        $_sql = "DELETE FROM {$this->_tables[0]} WHERE $_isAnd LIMIT 1";
+        return $this->execute($_sql)->rowCount();
+
+    }
+
+
     //  查询
     protected function select($_field, $_param = array())
     {
         $_limit = '';
+        $_order = '';
         if (Validate::isArray($_param) && !Validate::isNullArray($_param)) {
             $_limit = isset($_param['limit']) ? $_param['limit'] : '';
+            $_order = isset($_param['order']) ? $_param['order'] : '';
         }
         $_selectFields = implode(',', $_field);
-        $_sql = "SELECT $_selectFields FROM {$this->_tables[0]} $_limit";
+        $_sql = "SELECT $_selectFields FROM {$this->_tables[0]} $_order $_limit";
         $_stmt = $this->execute($_sql);
         $_result = array();
         while (!!$_objs = $_stmt->fetchObject()) {

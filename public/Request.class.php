@@ -51,26 +51,51 @@ class Request
     {
         $_addData = array();
         if (Validate::isArray($_POST) && !Validate::isNullArray($_POST)) {
-            //  验证数据合法性
-            if (!$this->_check->check($this->_model)) {
-                $this->_tpl->assign('message', $this->_check->getMessage());
-                $this->_tpl->assign('prev', Tool::getPrevPage());
-                $this->_tpl->display(SMARTY_ADMIN . 'public/error.tpl');
-
-                exit();
-            } 
-            
-            //  帅选准备入库的字段和数据
-            foreach ($_POST as $_key => $_value) {
-                if (Validate::inArray($_key, $_fields)) {
-                    $_addData[$_key] = $_value;
-
-                }
-            }
+            if (!$this->_check->addCheck($this->_model,$_POST)) $this->_check;
+            $_addData = $this->selectData($_POST, $_fields);
 
         }
         return $_addData;
     }
+
+
+
+    //  处理删除数据请求
+    public function delete($_fields)
+    {
+        $_deleteData = array();
+        if (Validate::isArray($_GET)&& !Validate::isNullArray($_GET)) {
+            $_deleteData = $this->selectData($_GET, $_fields);
+            if (!$this->_check->deleteCheck($this->_model,$_deleteData)) $this->check();
+        }
+        return $_deleteData;
+    }
+
+    /**
+     * @param $_GET
+     * @param $_fields
+     */
+    private function selectData($_requestData, $_fields)
+    {
+        $_selectData = array();
+        foreach ($_requestData as $_index => $_item) {
+            if (Validate::inArray($_index,$_fields)) {
+                $_selectData[$_index] = $_item;
+            }
+        }
+        return $_selectData;
+    }
+
+    private function check()
+    {
+        $this->_tpl->assign('message', $this->_check->getMessage());
+        $this->_tpl->assign('prev', Tool::getPrevPage());
+        $this->_tpl->display(SMARTY_ADMIN . 'public/error.tpl');
+        exit();
+    }
+
+    //  验证数据的合法性
+
 }
 
 

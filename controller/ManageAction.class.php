@@ -35,6 +35,11 @@ class ManageAction extends Action
         $this->_tpl->display(SMARTY_ADMIN . 'manage/add.tpl');
     }
 
+    //  删除管理员
+    public function delete()
+    {
+        if (isset($_GET['id'])) $this->_model->delete() ? $this->_redirect->succ(Tool::getPrevPage(), '管理员删除成功') : $this->_redirect->error('管理员删除失败');
+    }
     //  修改管理員
     public function update()
     {
