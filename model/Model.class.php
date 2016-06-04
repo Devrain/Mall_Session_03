@@ -54,6 +54,11 @@ class Model extends DB
         return $this->_db->total($this->_tables);
     }
 
+    protected function nextId()
+    {
+        return $this->_db->nextId($this->_tables);
+    }
+
     protected function getRequest()
     {
         return Request::getInstance($this, $this->_check);

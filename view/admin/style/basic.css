@@ -66,6 +66,11 @@ dl.form select {
 
 }
 
+dl.form textarea {
+    border: 1px solid #666;
+    background: #ffffff;
+}
+
 dl.form input.submit {
     cursor: pointer;
 }

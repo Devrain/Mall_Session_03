@@ -150,6 +150,15 @@ class DB
         return $_stmt->fetchObject()->count;
     }
 
+
+    //  得到下一个ID、
+    protected function nextId($_tables)
+    {
+        $_sql = "SHOW TABLE STATUS LIKE '$_tables[0]'";
+        $_stmt = $this->execute($_sql);
+        return $_stmt->fetchObject()->Auto_increment;
+    }
+
     /**
      * @param $_sql
      * 执行并且返回影响行数
