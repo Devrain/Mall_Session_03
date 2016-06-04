@@ -7,13 +7,18 @@ class ManageModel extends Model
     {
         $this->_fields = array('id', 'user', 'pass', 'level', 'login_count', 'last_ip', 'last_time', 'reg_time');
         $this->_tables = array(DB_FREFIX . 'manage');
-        parent::__construct($this, Factory::setCheck(), $this->_tables);
+        parent::__construct();
 
     }
 
     public function findAll()
     {
-        return parent::select(array('id', 'user', 'level', 'login_count', 'last_ip', 'last_time'), array('limit' => $this->_limit, 'order' => 'ORDER BY reg_time DESC'));
+        return parent::select(array('id', 'user', 'level', 'login_count', 'last_ip', 'last_time'), array('limit' => $this->_limit, 'order' => 'reg_time DESC'));
+    }
+
+    public function findOne()
+    {
+        return parent::select(array('id', 'user', 'level'), array('where' => array('id' => '275'), 'limit' => '1'));
     }
 
     public function total()
@@ -33,7 +38,7 @@ class ManageModel extends Model
 
     public function delete()
     {
-        $_deleteData =$this->_request->delete($this->_fields);
+        $_deleteData = $this->_request->delete($this->_fields);
         return parent::delete($_deleteData);
     }
 

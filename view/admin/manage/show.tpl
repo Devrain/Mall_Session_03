@@ -26,7 +26,9 @@
                 <td>{$value->last_ip}</td>
                 <td>{$value->last_time}</td>
                 <td>
-                    <img src="view/admin/images/edit.gif" alt="编辑" title="编辑"/>
+                    <a href="?a=manage&m=update&id={$value->id}">
+                        <img src="view/admin/images/edit.gif" alt="编辑" title="编辑"/>
+                    </a>
                     <a href="?a=manage&m=delete&id={$value->id}" onclick="return confirm('您真的删除这个管理吗？')?true:false">
                         <img src="view/admin/images/drop.gif" alt="删除" title="删除"/>
                     </a>
