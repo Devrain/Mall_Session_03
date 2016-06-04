@@ -48,17 +48,7 @@ class ManageModel extends Model
         
     }
     
-    public function delete()
-    {
-        $_deleteData = $this->getRequest()->delete($this->_fields);
-        return parent::delete($_deleteData);
-    }
 
-
-    public function isOne($_isOneData)
-    {
-        return parent::isOne($_isOneData);
-    }
 
     public function isUser()
     {

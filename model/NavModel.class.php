@@ -15,6 +15,22 @@ class NavModel extends Model
         $this->_tables = array(DB_FREFIX . 'nav');
     }
 
+    public function findAll()
+    {
+        return parent::select(array('id', 'name', 'info', 'sort'), array('limit' => $this->_limit, 'order' => 'sort ASC'));
+    }
+
+    public function findOne()
+    {
+        $_oneData = $this->getRequest()->one($this->_fields);
+        return parent::select(array('id', 'name', 'info'), array('where' => $_oneData, 'limit' => '1'));
+    }
+
+    public function total()
+    {
+        return parent::total();
+    }
+
     public function add()
     {
         $_addData = $this->getRequest()->add($this->_fields);
@@ -22,6 +38,17 @@ class NavModel extends Model
         return parent::add($_addData);
     }
 
+    public function update()
+    {
+        $_oneData = $this->getRequest()->one($this->_fields);
+        $_updateData = $this->getRequest()->update($this->_fields);
+        return parent::update($_oneData, $_updateData);
+    }
+
+    public function isName()
+    {
+        $this->_check->ajax($this);
+    }
 
 
 

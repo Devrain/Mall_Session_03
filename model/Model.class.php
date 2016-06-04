@@ -35,6 +35,7 @@ class Model extends DB
 
     protected function delete($_deleteData)
     {
+        $_deleteData = $this->getRequest()->delete($this->_fields);
         return $this->_db->delete($this->_tables, $_deleteData);
     }
 

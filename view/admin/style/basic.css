@@ -69,6 +69,7 @@ dl.form select {
 dl.form textarea {
     border: 1px solid #666;
     background: #ffffff;
+    font-size:14px;
 }
 
 dl.form input.submit {

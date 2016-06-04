@@ -67,24 +67,7 @@ class ManageCheck extends Check
     }
 
 
-    //  删除管理员的检查
-    public function deleteCheck(&$_model, $_requestData)
-    {
-        if (!$_model->isOne($_requestData)) {
-            $this->_message[] = '找不到要删除的管理员';
-            $this->_flag = false;
-        }
-        return $this->_flag;
-    }
 
-    public function oneCheck(&$_model, $_requestData)
-    {
-        if (!$_model->isOne($_requestData)) {
-            $this->_message[] = '找不到要修改的管理员';
-            $this->_flag = false;
-        }
-        return $this->_flag;
-    }
 
     public function ajax(&$_model)
     {

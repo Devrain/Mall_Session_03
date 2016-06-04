@@ -5,6 +5,7 @@
     <title>在线商城后台管理</title>
     <link rel="stylesheet" href="view/admin/style/basic.css">
     <link rel="stylesheet" href="view/admin/style/nav.css">
+    <script type="text/javascript" src="view/admin/js/ajax.js"></script>
     <script type="text/javascript" src="view/admin/js/nav.js"></script>
 </head>
 <body>
@@ -12,7 +13,7 @@
 <form action="?a=nav&m=add" method="post" class="add">
     <input type="hidden" name="flag" id="flag"/>
     <dl class="form">
-        <dd>名称：<input type="text" name="name" class="text">(2-4位之间)</dd>
+        <dd>名称：<input type="text" name="name" class="text" id="name" onblur="checkName()">(2-4位之间)</dd>
         <dd><span class="middle">简介：</span><textarea name="info" ></textarea><span class="middle">(200以内)</span></dd>
         <dd><input type="submit" value="新增导航" name="send" onclick="return addNav()" class="submit"></dd>
     </dl>

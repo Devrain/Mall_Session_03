@@ -84,7 +84,7 @@ class Request
         $_deleteData = array();
         if (Validate::isArray($_GET) && !Validate::isNullArray($_GET)) {
             $_deleteData = $this->selectData($_GET, $_fields);
-            if (!$this->_check->deleteCheck($this->_model, $_deleteData)) $this->check();
+            if (!$this->_check->oneCheck($this->_model, $_deleteData)) $this->check();
         }
         return $_deleteData;
     }
