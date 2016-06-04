@@ -45,7 +45,7 @@ class DB
     }
 
     //  新增
-    protected function add($_tables,$_addData)
+    protected function add($_tables, $_addData)
     {
         //  先对数据转意
 //        $_addData = Tool::setFormString($_addData);
@@ -64,7 +64,7 @@ class DB
     }
 
 
-    protected function update($_tables,$_oneData, $_updateData)
+    protected function update($_tables, $_oneData, $_updateData)
     {
         $_isAnd = '';
         foreach ($_oneData as $_index => $_item) {
@@ -83,7 +83,7 @@ class DB
     }
 
     //  验证一条数据
-    protected function isOne($_tables,$_isOneData)
+    protected function isOne($_tables, $_isOneData)
     {
         $_isAnd = '';
         foreach ($_isOneData as $_index => $_item) {
@@ -98,7 +98,7 @@ class DB
 
 
     //  删除
-    protected function delete($_tables,$_deleteData)
+    protected function delete($_tables, $_deleteData)
     {
         $_isAnd = '';
         foreach ($_deleteData as $_index => $_item) {
@@ -112,24 +112,26 @@ class DB
 
 
     //  查询
-    protected function select($_tables,$_field, $_param = array())
+    protected function select($_tables, $_field, $_param = array())
     {
-        $_limit = '';
-        $_order = '';
-        $_where = '';
+        $_limit = $_order = $_where = $_inAnd = '';
+
+
         if (Validate::isArray($_param) && !Validate::isNullArray($_param)) {
             $_limit = isset($_param['limit']) ? 'LIMIT ' . $_param['limit'] : '';
             $_order = isset($_param['order']) ? 'ORDER BY ' . $_param['order'] : '';
-            if (isset($_param['where'])) {
-                $_isAnd = '';
+            if (isset($_param['where'])&& Validate::isArray($_param['where'])) {
                 foreach ($_param['where'] as $_index => $_item) {
                     $_isAnd .= "$_index='$_item' AND ";
                 }
-                $_where = 'WHERE ' . substr($_isAnd, 0, -4);
+                $_where = ' WHERE ' . substr($_isAnd, 0, -4);
+            }elseif (isset($_param['where'])) {
+                $_where = ' WHERE ' . $_param['where'];
             }
         }
         $_selectFields = implode(',', $_field);
-        $_sql = "SELECT $_selectFields FROM $_tables[0] $_where $_order $_limit";
+        $_table = isset($_tables[1]) ? ($_tables[0] . ',' . $_tables[1]) : $_tables[0];
+        $_sql = "SELECT $_selectFields FROM $_table $_where $_order $_limit";
         echo $_sql;
         $_stmt = $this->execute($_sql);
         $_result = array();

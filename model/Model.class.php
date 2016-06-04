@@ -54,6 +54,11 @@ class Model extends DB
         return $this->_db->total($this->_tables);
     }
 
+    protected function getRequest()
+    {
+        return Request::getInstance($this, $this->_check);
+    }
+
     public function setLimit($_limit)
     {
         $this->_limit = $_limit;
