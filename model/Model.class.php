@@ -20,7 +20,7 @@ class Model extends DB
     {
         $this->_db = parent::getInstance($this->_tables);
         $this->_check = Factory::setCheck();
-        $this->_request = Request::getInstance($this,$this->_check);
+        $this->_request = Request::getInstance($this, $this->_check);
     }
 
     public function update($_oneData, $_updateData)
@@ -30,30 +30,28 @@ class Model extends DB
 
     protected function add($_addData)
     {
-        return $this->_db->add($_addData);
+        return $this->_db->add($this->_tables, $_addData);
     }
 
     protected function delete($_deleteData)
     {
-        return $this->_db->delete($_deleteData);
+        return $this->_db->delete($this->_tables, $_deleteData);
     }
 
-    protected function isOne($_isOneData)
+    protected function isOne($_OneData)
     {
-        return $this->_db->isOne($_isOneData);
+        return $this->_db->isOne($this->_tables, $_OneData);
     }
 
 
-
-
-    protected function select($_field,$_param=array())
+    protected function select($_field, $_param = array())
     {
-        return $this->_db->select($_field,$_param);
+        return $this->_db->select($this->_tables,$_field, $_param);
     }
 
     protected function total()
     {
-        return $this->_db->total();
+        return $this->_db->total($this->_tables);
     }
 
     public function setLimit($_limit)

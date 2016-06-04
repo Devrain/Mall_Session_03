@@ -45,7 +45,7 @@ class Tool
     static public function setHtmlString($_data)
     {
 
-        if (is_array($_data)) {
+        if (Validate::isArray($_data)) {
             foreach ($_data as $_index => $_item) {
                 $_string[$_index] = self::setHtmlString($_item);
             }
@@ -60,6 +60,18 @@ class Tool
             $_string = htmlspecialchars($_data);
         }
         return $_string;
+    }
+
+    //  表单选项转换
+    static public function setFromItem($_data, $_key, $_value)
+    {
+        $_items = array();
+        if (Validate::isArray($_data)) {
+            foreach ($_data as $item) {
+                $_items[$item->$_key] = $item->$_value;
+            }
+        }
+        return $_items;
     }
 
     //  获取上一页
