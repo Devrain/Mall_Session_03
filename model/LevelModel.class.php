@@ -12,7 +12,7 @@ class LevelModel extends Model
     {
         parent::__construct();
         $this->_fields = array('id', 'level_name');
-        $this->_tables = array(BD_FREFIX . 'level');
+        $this->_tables = array(DB_FREFIX . 'level');
     }
 
 

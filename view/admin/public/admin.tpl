@@ -45,8 +45,8 @@
     <dl style="display: none;">
         <dt>系統</dt>
         <dd><a href="?a=manage" target="in">管理員列表</a></dd>
-        <dd><a href="###">系統2</a></dd>
-        <dd><a href="###">系統3</a></dd>
+        <dd><a href="###">等级列表</a></dd>
+        <dd><a href="###">权限管理</a></dd>
     </dl>
 </div>
 

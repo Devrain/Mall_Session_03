@@ -17,24 +17,9 @@
         <dd>密码：<input type="password" name="notpass" id="" class="text">(与密码一致)</dd>
         <dd>等级：<select name="level" id="">
                 <option value="0">选择一个等级权限</option>
-                {if $OneManage[0]->level == 1}
-                    <option value="1" selected="selected">超级管理员</option>
-                {else}
-                    <option value="1">超级管理员</option>
-                {/if}
-                {if $OneManage[0]->level == 2}
-                    <option value="2" selected="selected">普通管理员</option>
-                {else}
-                    <option value="2">普通管理员</option>
-                {/if}
-                {if $OneManage[0]->level == 3}
-                    <option value="3" selected="selected">商品发布</option>
-                {else}
-                    <option value="3">商品发布</option>
-                {/if}
-
-
-            </select>（必须选择一个）</dd>
+                {html_options options=$AllLevel selected=$OneManage[0]->leve}
+            </select>（必须选择一个）
+        </dd>
         <dd><input type="submit" value="修改管理员" name="send" onclick="return updateManage();" class="submit"></dd>
     </dl>
 
