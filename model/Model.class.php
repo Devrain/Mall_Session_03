@@ -57,7 +57,7 @@ class Model extends DB
         return $this->_db->delete($this->_tables, $_param);
     }
 
-    protected function isOne(Array $_param)
+    public function isOne(Array $_param)
     {
         return $this->_db->isOne($this->_tables, $_param);
     }

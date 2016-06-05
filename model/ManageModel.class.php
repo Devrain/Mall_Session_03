@@ -77,10 +77,7 @@ class ManageModel extends Model
         return parent::delete($_where);
     }
 
-    public function isOne(Array $_param)
-    {
-        return parent::isOne($_param);
-    }
+
 
     public function update()
     {
@@ -101,14 +98,14 @@ class ManageModel extends Model
 
     public function login()
     {
-        $_where = array("user='{$this->_R['user']}'", "pass='" . sha1($this->_R['user']) . "'");
+        $_where = array("user='{$this->_R['user']}'", "pass='" . sha1($this->_R['pass']) . "'");
         return $this->getRequest()->login($_where);
     }
 
     //  ajax login
     public function ajaxLogin()
     {
-        $_where = array("user='{$this->_R['user']}'", "pass='" . sha1($this->_R['user']) . "'");
+        $_where = array("user='{$this->_R['user']}'", "pass='" . sha1($this->_R['pass']) . "'");
         $this->_check->ajaxLogin($this,$_where);
     }
 

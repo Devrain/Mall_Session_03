@@ -22,7 +22,7 @@ class Request
     private $_model = null;
 
     //  公共靜態方法獲取實例化對象
-    static public function getInstance(&$_model, &$_check)
+    static public function getInstance(Model &$_model, Check &$_check)
     {
         if (!(self::$_instance instanceof self)) {
             self::$_instance = new self();

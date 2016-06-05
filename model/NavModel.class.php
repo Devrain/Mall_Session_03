@@ -8,7 +8,6 @@
  */
 class NavModel extends Model
 {
-    private $_sid = 0;
 
     public function __construct()
     {
@@ -16,68 +15,76 @@ class NavModel extends Model
         $this->_fields = array('id', 'name', 'info', 'sort', 'sid');
         $this->_tables = array(DB_FREFIX . 'nav');
         $this->_check = new NavCheck();
-        $this->_sid = isset($_GET['sid']) ? Tool::setFormString($_GET['sid']) : 0;
+        list(
+            $this->_R['id'],
+            $this->_R['sid'],
+            $this->_R['name']
+            ) = $this->getRequest()->getParam(array(
+            isset($_GET['id']) ? $_GET['id'] : null,
+            isset($_GET['sid']) ? $_GET['sid'] : 0,
+            isset($_POST['name']) ? $_POST['name'] : null
+        ));
+
     }
 
     public function findAll()
     {
         return parent::select(array('id', 'name', 'info', 'sort'),
-            array('where' => array('sid' => $this->_sid), 'limit' => $this->_limit, 'order' => 'sort ASC'));
+            array('where' => array("sid='{$this->_R['sid']}'"), 'limit' => $this->_limit, 'order' => 'sort ASC'));
     }
 
     public function findOne()
     {
         if (isset($_GET['sid'])) {
-            return parent::select(array('id', 'name', 'info'), array('where' => array('id' => $this->_sid), 'limit' => '1'));
+            return parent::select(array('id', 'name', 'info'), array('where' => array("id='{$this->_R['sid']}'"), 'limit' => '1'));
         }
-        $_oneData = $this->getRequest()->one($this->_fields);
-        return parent::select(array('id', 'name', 'info'), array('where' => $_oneData, 'limit' => '1'));
+        $_where = array("id='{$this->_R['id']}'");
+        $this->getRequest()->one($_where);
+        return parent::select(array('id', 'name', 'info'), array('where' => $_where, 'limit' => '1'));
     }
 
     public function total()
     {
-        return parent::total(array('where' => array('sid' => $this->_sid)));
+        return parent::total(array('where' => array("sid='{$this->_R['sid']}'")));
     }
 
     public function add()
     {
-        $_addData = $this->getRequest()->add($this->_fields);
+        $_where = array("name='{$this->_R['name']}'");
+        $_addData = $this->getRequest()->add($this->_fields, $_where);
         $_addData['sort'] = $this->nextId();
         return parent::add($_addData);
     }
 
     public function delete()
     {
-        $_deleteData = $this->getRequest()->delete($this->_fields);
-        return parent::delete($_deleteData);
+        $_where = array("id='{$this->_R['id']}'");
+        return parent::delete($_where);
     }
 
-    public function isOne($_oneData)
-    {
-        return parent::isOne($_oneData);
-    }
-    
+
     public function update()
     {
-        $_oneData = $this->getRequest()->one($this->_fields);
-        $_updateData = $this->getRequest()->update($this->_fields);
-        return parent::update($_oneData, $_updateData);
+        $_where = array("id='{$this->_R['id']}'");
+        $_updateData = $this->getRequest()->update($this->_fields, $_where);
+        return parent::update($_where, $_updateData);
     }
 
     public function sort()
     {
-
         foreach ($_POST['sort'] as $_index => $_item) {
             if (!is_numeric($_item)) continue;
-            parent::update(array('id' => $_index), array('sort' => $_item));
+            $_setField = array('sort' => $_item);
+            $_where = array("id='$_index'");
+            parent::update($_where, $_setField);
         }
         return true;
-
     }
 
     public function isName()
     {
-        $this->_check->ajax($this);
+        $_where = array("name='{$this->_R['name']}'");
+        $this->_check->ajax($this, $_where);
     }
 
 

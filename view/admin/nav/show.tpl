@@ -17,9 +17,13 @@
                     <td>{$value->name}</td>
                     <td>{$value->info}</td>
                     <td>
+                        {if $OneNav}
+                        无
+                        {else}
                         <a href="?a=nav&sid={$value->id}">查看</a>
                         |
                         <a href="?a=nav&m=add&id={$value->id}">添加</a></td>
+                    {/if}
                     <td><input type="text" name="sort[{$value->sort}]" class="sort" value="{$value->sort}" id=""></td>
                     <td>
                         <a href="?a=nav&m=update&id={$value->id}">
