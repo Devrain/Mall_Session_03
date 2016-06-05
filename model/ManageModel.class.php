@@ -9,6 +9,17 @@ class ManageModel extends Model
         $this->_fields = array('id', 'user', 'pass', 'level', 'login_count', 'last_ip', 'last_time', 'reg_time');
         $this->_tables = array(DB_FREFIX . 'manage');
         $this->_check = new ManageCheck();
+        list(
+            $this->_R['id'],
+            $this->_R['user'],
+            $this->_R['pass'],
+            $this->_R['code']
+            ) = $this->getRequest()->getParam(array(
+            isset($_GET['id']) ? $_GET[id] : null,
+            isset($_POST['user']) ? $_POST['user'] : null,
+            isset($_POST['pass']) ? $_POST['pass'] : null,
+            isset($_POST['code']) ? $_POST['code'] : null
+        ));
     }
 
     public function findAll()
@@ -20,8 +31,7 @@ class ManageModel extends Model
 
     public function findOne()
     {
-        list($_id) = $this->getRequest()->getParam(array($_GET['id']));
-        $_where = array("id='$_id'");
+        $_where = array("id='{$this->_R['id']}'");
         $this->getRequest()->one($_where);
         return parent::select(array('id', 'user', 'level'),
             array('where' => $_where, 'limit' => '1'));
@@ -32,13 +42,12 @@ class ManageModel extends Model
         list($_user) = $this->getRequest()->getParam(array($_POST['user']));
         $this->_tables = array(DB_FREFIX . 'manage a', DB_FREFIX . 'level b');
         return parent::select(array('a.user', 'b.level_name'),
-            array('where' => array('a.level=b.id', "user='$_user'"), 'limit' => '1'));
+            array('where' => array('a.level=b.id', "user='{$this->_R['user']}'"), 'limit' => '1'));
     }
 
     public function countLogin()
     {
-        list($_user) = $this->getRequest()->getParam(array($_POST['user']));
-        $_where = array("user='$_user'");
+        $_where = array("user='{$this->_R['user']}'");
         $_updateData['login_count'] = array('login_count+1');
         $_updateData['last_ip'] = Tool::getIP();
         $_updateData['last_time'] = Tool::getDate();
@@ -52,7 +61,8 @@ class ManageModel extends Model
 
     public function add()
     {
-        $_addData = $this->getRequest()->add($this->_fields);
+        $_where = array("user='{$this->_R['user']}'");
+        $_addData = $this->getRequest()->add($this->_fields,$_where);
         $_addData['pass'] = sha1($_addData['pass']);
         $_addData['last_ip'] = Tool::getIP();
         $_addData['reg_time'] = Tool::getDate();
@@ -63,8 +73,7 @@ class ManageModel extends Model
 
     public function delete()
     {
-        list($_id) = $this->getRequest()->getParam(array($_GET['id']));
-        $_where = array("id='$_id'");
+        $_where = array("id='{$this->_R['id']}'");
         return parent::delete($_where);
     }
 
@@ -75,8 +84,7 @@ class ManageModel extends Model
 
     public function update()
     {
-        list($_id) = $this->getRequest()->getParam(array($_GET['id']));
-        $_where = array("id='$_id'");
+        $_where = array("id='{$this->_R['id']}'");
         $this->getRequest()->one($_where);
         $_updateData = $this->getRequest()->update($this->_fields);
         $_updateData['pass'] = sha1($_updateData['pass']);
@@ -87,25 +95,26 @@ class ManageModel extends Model
 
     public function isUser()
     {
-        $this->_check->ajax($this);
+        $_where = array("user=''{$this->_R['user']}");
+        $this->_check->ajax($this,$_where);
     }
 
     public function login()
     {
-        list($_user, $_pass) = $this->getRequest()->getParam(array($_POST['user'], $_POST['pass']));
-        $_where = array("user='$_user'", "pass='" . sha1($_pass) . "'");
+        $_where = array("user='{$this->_R['user']}'", "pass='" . sha1($this->_R['user']) . "'");
         return $this->getRequest()->login($_where);
     }
 
     //  ajax login
     public function ajaxLogin()
     {
-        $this->_check->ajaxLogin($this);
+        $_where = array("user='{$this->_R['user']}'", "pass='" . sha1($this->_R['user']) . "'");
+        $this->_check->ajaxLogin($this,$_where);
     }
 
     public function ajaxCode()
     {
-        $this->_check->ajaxCode($this);
+        $this->_check->ajaxCode($this,$this->_R['code']);
     }
 
 }

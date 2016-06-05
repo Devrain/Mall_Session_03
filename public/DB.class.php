@@ -43,7 +43,7 @@ class DB
     }
 
     //  新增
-    protected function add($_tables, $_addData)
+    protected function add($_tables,Array $_addData)
     {
         //  先对数据转意
 //        $_addData = Tool::setFormString($_addData);
@@ -130,7 +130,7 @@ class DB
                     $_where .= $_item . ' AND ';
                 }
                 $_where = 'WHERE ' . substr($_where, 0, -4);
-            } 
+            }
 
 
         }
@@ -147,7 +147,7 @@ class DB
 
 
     //  总记录
-    protected function total($_tables, $_param = array())
+    protected function total($_tables,Array $_param = array())
     {
         $_where = '';
         if (isset($_param['where'])) {

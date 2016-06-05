@@ -47,22 +47,25 @@ class Request
     }
 
     //  處理新增數據請求
-    public function add($_fields)
+    public function add(Array $_fields, Array $_param = array())
     {
         $_addData = array();
         if (Validate::isArray($_POST) && !Validate::isNullArray($_POST)) {
-            if (!$this->_check->addCheck($this->_model, $_POST)) $this->_check;
-            $_addData = $this->selectData($_POST, $_fields);
+            $_requestData = Tool::setFormString($_POST);
+            if (!$this->_check->addCheck($this->_model, $_requestData, $_param)) $this->_check;
+            $_addData = $this->selectData($_requestData, $_fields);
 
         }
         return $_addData;
     }
 
-    public function update($_fields)
+    public function update(Array $_fields)
     {
         $_updateData = array();
         if (Validate::isArray($_POST) && !Validate::isNullArray($_POST)) {
-            if (!$this->_check->updateCheck($this->_model, $_POST)) $this->check();
+            $_requestData = Tool::setFormString($_POST);
+            if (!$this->_check->updateCheck($this->_model, $_requestData)) $this->check();
+            $_requestData = $this->selectData($_requestData, $_fields);
         }
         return $_updateData;
     }
@@ -70,7 +73,7 @@ class Request
 
     public function one(Array $_param)
     {
-        if (!$this->_check->oneCheck($this->_model,$_param)) $this->check();
+        if (!$this->_check->oneCheck($this->_model, $_param)) $this->check();
     }
 
     //  处理删除数据请求
@@ -97,8 +100,8 @@ class Request
 
     public function login(Array $_param)
     {
-        if (Validate::isArray($_POST)&&!Validate::isNullArray($_POST)) {
-            if (!$this->_check->loginCheck($this->_model,$_POST,$_param)) $this->check();
+        if (Validate::isArray($_POST) && !Validate::isNullArray($_POST)) {
+            if (!$this->_check->loginCheck($this->_model, $_POST, $_param)) $this->check();
         }
         return true;
     }
