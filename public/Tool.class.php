@@ -44,9 +44,10 @@ class Tool
     //  html过滤
     static public function setHtmlString($_data)
     {
-
+        $_string = '';
         if (Validate::isArray($_data)) {
             foreach ($_data as $_index => $_item) {
+                if (Validate::isNullArray($_data)) return $_data;
                 $_string[$_index] = self::setHtmlString($_item);
             }
         } elseif (is_object($_data)) {

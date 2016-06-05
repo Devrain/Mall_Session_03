@@ -38,9 +38,9 @@ class Model extends DB
         return $this->_db->select($this->_tables, $_field, $_param);
     }
 
-    protected function total()
+    protected function total($_param=array())
     {
-        return $this->_db->total($this->_tables);
+        return $this->_db->total($this->_tables,$_param);
     }
 
     protected function nextId()

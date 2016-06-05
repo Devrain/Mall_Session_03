@@ -140,9 +140,16 @@ class DB
 
 
     //  总记录
-    protected function total($_tables)
+    protected function total($_tables,$_param=array())
     {
-        $_sql = "SELECT COUNT(*) as count FROM $_tables[0]";
+        $_where = '';
+        if (isset($_param['where'])) {
+            foreach ($_param['where'] as $_index => $_item) {
+                $_where .= "$_index='$_item' AND ";
+            }
+            $_where = 'WHERE ' . substr($_where, 0, -4);
+        }
+        $_sql = "SELECT COUNT(*) as count FROM $_tables[0] $_where";
         $_stmt = $this->execute($_sql);
         return $_stmt->fetchObject()->count;
     }

@@ -8,11 +8,14 @@
  */
 class NavModel extends Model
 {
+    private $_sid = 0;
+
     public function __construct()
     {
         parent::__construct();
         $this->_fields = array('id', 'name', 'info', 'sort', 'sid');
         $this->_tables = array(DB_FREFIX . 'nav');
+        $this->_sid = isset($_GET['sid']) ? Tool::setFormString($_GET['sid']) : 0;
     }
 
     public function findAll()
@@ -22,13 +25,16 @@ class NavModel extends Model
 
     public function findOne()
     {
+        if (isset($_GET['dis'])) {
+            return parent::select(array('id', 'name', 'info'), array('where' => array('id' => $this->_sid), 'limit' => '1'));
+        }
         $_oneData = $this->getRequest()->one($this->_fields);
         return parent::select(array('id', 'name', 'info'), array('where' => $_oneData, 'limit' => '1'));
     }
 
     public function total()
     {
-        return parent::total();
+        return parent::total(array('where'=>array('sid'=>$this->_sid)));
     }
 
     public function add()
