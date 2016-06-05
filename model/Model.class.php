@@ -13,41 +13,29 @@ class Model extends DB
     protected $_fields = array();
     protected $_tables = array();
     protected $_check = null;
-    protected $_request = null;
     protected $_limit = '';
 
     protected function __construct()
     {
-        $this->_db = parent::getInstance($this->_tables);
+        $this->_db = parent::getInstance();
         $this->_check = Factory::setCheck();
-        $this->_request = Request::getInstance($this, $this->_check);
     }
 
-    public function update($_oneData, $_updateData)
-    {
-        return $this->_db->update($_oneData, $_updateData);
-    }
 
     protected function add($_addData)
     {
         return $this->_db->add($this->_tables, $_addData);
     }
 
-    protected function delete($_deleteData)
+    protected function update($_oneData, $_updateData)
     {
-        $_deleteData = $this->getRequest()->delete($this->_fields);
-        return $this->_db->delete($this->_tables, $_deleteData);
-    }
-
-    protected function isOne($_OneData)
-    {
-        return $this->_db->isOne($this->_tables, $_OneData);
+        return $this->_db->update($this->_tables, $_oneData, $_updateData);
     }
 
 
     protected function select($_field, $_param = array())
     {
-        return $this->_db->select($this->_tables,$_field, $_param);
+        return $this->_db->select($this->_tables, $_field, $_param);
     }
 
     protected function total()
@@ -64,6 +52,18 @@ class Model extends DB
     {
         return Request::getInstance($this, $this->_check);
     }
+
+    public function delete()
+    {
+        $_deleteData = $this->getRequest()->delete($this->_fields);
+        return $this->_db->delete($this->_tables, $_deleteData);
+    }
+
+    public function isOne($_OneData)
+    {
+        return $this->_db->isOne($this->_tables, $_OneData);
+    }
+
 
     public function setLimit($_limit)
     {

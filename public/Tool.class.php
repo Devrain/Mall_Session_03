@@ -63,7 +63,7 @@ class Tool
     }
 
     //  表单选项转换
-    static public function setFromItem($_data, $_key, $_value)
+    static public function setFormItem($_data, $_key, $_value)
     {
         $_items = array();
         if (Validate::isArray($_data)) {

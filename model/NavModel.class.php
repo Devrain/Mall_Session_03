@@ -1,11 +1,11 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: Administrator
  * Date: 2016/6/4
  * Time: 20:25
  */
- 
 class NavModel extends Model
 {
     public function __construct()
@@ -45,13 +45,20 @@ class NavModel extends Model
         return parent::update($_oneData, $_updateData);
     }
 
+    public function sort()
+    {
+        foreach ($_POST['sort'] as $_index => $_item) {
+            if (!is_numeric($_item)) continue;
+            parent::update(array('id' => $_index), array('sort' => $_item));
+        }
+        return true;
+
+    }
+
     public function isName()
     {
         $this->_check->ajax($this);
     }
-
-
-
 
 
 }

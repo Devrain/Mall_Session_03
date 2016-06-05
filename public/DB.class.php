@@ -10,18 +10,16 @@ class DB
 {
     //  PDO對象
     private $_pdo = null;
-    //  数据表
-    private $_tables = array();
+
 
     //  用於存放實例化對象
     static private $_instance = null;
 
     //  公共靜態方法獲取實例化對象
-    static protected function getInstance($_tables)
+    static protected function getInstance()
     {
         if (!(self::$_instance instanceof self)) {
             self::$_instance = new self();
-            self::$_instance->_tables = $_tables;
         }
         return self::$_instance;
     }
@@ -70,7 +68,7 @@ class DB
         foreach ($_oneData as $_index => $_item) {
             $_isAnd .= "$_index='$_item' AND ";
         }
-        $_isAnd = substr($_isAnd, 0, 4);
+        $_isAnd = substr($_isAnd, 0, -4);
         $_setData = '';
         foreach ($_updateData as $_index => $_item) {
             $_setData .= "$_index'$_item',";
@@ -114,7 +112,7 @@ class DB
     //  查询
     protected function select($_tables, $_field, $_param = array())
     {
-        $_limit = $_order = $_where = $_inAnd = '';
+        $_limit = $_order = $_where = $_isAnd = '';
 
 
         if (Validate::isArray($_param) && !Validate::isNullArray($_param)) {
@@ -132,7 +130,6 @@ class DB
         $_selectFields = implode(',', $_field);
         $_table = isset($_tables[1]) ? ($_tables[0] . ',' . $_tables[1]) : $_tables[0];
         $_sql = "SELECT $_selectFields FROM $_table $_where $_order $_limit";
-        echo $_sql;
         $_stmt = $this->execute($_sql);
         $_result = array();
         while (!!$_objs = $_stmt->fetchObject()) {

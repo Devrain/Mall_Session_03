@@ -33,7 +33,7 @@ class Action
 
     protected function page($_page_size = PAGE_SIZE)
     {
-        $_page = new Page($this->_model->total(),$_page_size);
+        $_page = new Page($this->_model->total(), $_page_size);
         $this->_model->setLimit($_page->getLimit());
         $this->_tpl->assign('page', $_page->showPage());
         $this->_tpl->assign('num', ($_page->getPage() - 1) * $_page_size);

@@ -8,7 +8,8 @@
 </head>
 <body>
 <h2><a href="?a=nav&m=add">添加导航</a>系统-导航条列表</h2>
-<div class="list">
+<div id="list">
+<form method="post" action="?a=nav&m=sort" >
     <table>
         <tr>
             <th>名称</th>
@@ -37,9 +38,16 @@
                 <td colspan="5">没有任何导航</td>
             </tr>
         {/foreach}
-
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <input type="submit" value="排序" name="send">
+            <td></td>
+        </tr>
     </table>
+</form>
 </div>
-<div class="page">{$page}</div>
+<div id="page">{$page}</div>
 </body>
 </html>

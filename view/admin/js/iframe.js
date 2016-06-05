@@ -18,7 +18,7 @@ window.onload = function () {
         //  如果有高度給值
         if (height >= 0) {
             document.getElementById('sidebar').style.height = height + 'px';
-            document.getElementById('main').style.heigt = height + 'px';
+		document.getElementById('main').style.height = height + 'px';
         }
     })()
 };

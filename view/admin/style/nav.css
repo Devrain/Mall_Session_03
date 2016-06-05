@@ -23,3 +23,10 @@ dl.form input.submit {
     padding: 2px 0;
 
 }
+
+.sort {
+    border: 1px solid #666;
+    width: 30px;
+    background: #fff;
+	text-align:center;
+}

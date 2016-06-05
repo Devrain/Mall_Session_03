@@ -34,13 +34,16 @@ class Redirect
 
     }
 
-    public function succ($_url, $_info)
+    public function succ($_url, $_info = '')
     {
-        $this->_tpl->assign('message', $_info);
-        $this->_tpl->assign('url', $_url);
-        $this->_tpl->display(SMARTY_ADMIN . 'public/succ.tpl');
+        if (!empty($_info)) {
+            $this->_tpl->assign('message', $_info);
+            $this->_tpl->assign('url', $_url);
+            $this->_tpl->display(SMARTY_ADMIN . 'public/succ.tpl');
+        } else {
+            header('Location:' . $_url);
+        }
         exit();
-
     }
 
     public function error($_info)

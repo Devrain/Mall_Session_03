@@ -7,7 +7,6 @@
 
     <link rel="stylesheet" href="view/admin/style/basic.css">
     <link rel="stylesheet" href="view/admin/style/admin.css">
-    <link rel="stylesheet" href="view/admin/style/main.css">
     <script type="text/javascript" src="view/admin/js/iframe.js"></script>
     <script type="text/javascript" src="view/admin/js/channel.js"></script>
 </head>

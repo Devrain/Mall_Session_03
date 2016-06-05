@@ -32,9 +32,11 @@ class ManageAction extends Action
     //  添加管理員
     public function add()
     {
+        print_r($_POST);
         //  检测post过来的参数
         if (isset($_POST['send'])) $this->_model->add() ? $this->_redirect->succ('?a=manage', '管理员新增成功') : $this->_redirect->error('管理员新增失败');
-        $this->_tpl->assign('AllLevel', Tool::setFromItem($this->_level->findAll(), 'id', 'level_name'));
+
+        $this->_tpl->assign('AllLevel', Tool::setFormItem($this->_level->findAll(), 'id', 'level_name'));
         $this->_tpl->display(SMARTY_ADMIN . 'manage/add.tpl');
     }
 
@@ -47,9 +49,10 @@ class ManageAction extends Action
     //  修改管理員
     public function update()
     {
+        print_r($_POST);
         if (isset($_POST['send'])) $this->_model->update() ? $this->_redirect->succ(Tool::getPrevPage(), '管理员修改成功！') : $this->_redirect->error('管理员修改失败');
         if (isset($_GET['id'])) {
-            $this->_tpl->assign('AllLevel', Tool::setFromItem($this->_level->findAll(), 'id', 'level_name'));
+            $this->_tpl->assign('AllLevel', Tool::setFormItem($this->_level->findAll(), 'id', 'level_name'));
             $this->_tpl->assign('OneManage', $this->_model->findOne());
             $this->_tpl->display(SMARTY_ADMIN . 'manage/update.tpl');
         }
