@@ -57,6 +57,18 @@ class ManageModel extends Model
     }
 
 
+    public function delete()
+    {
+        list($_id) = $this->getRequest()->getParam(array($_GET['id']));
+        $_where = array("id='$_id'");
+        return parent::delete($_where);
+    }
+
+    public function isOne($_oneData)
+    {
+        return parent::isOne($_oneData);
+    }
+
     public function update()
     {
         $_oneData = $this->getRequest()->one($this->_fields);

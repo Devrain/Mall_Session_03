@@ -46,6 +46,17 @@ class NavModel extends Model
         return parent::add($_addData);
     }
 
+    public function delete()
+    {
+        $_deleteData = $this->getRequest()->delete($this->_fields);
+        return parent::delete($_deleteData);
+    }
+
+    public function isOne($_oneData)
+    {
+        return parent::isOne($_oneData);
+    }
+    
     public function update()
     {
         $_oneData = $this->getRequest()->one($this->_fields);

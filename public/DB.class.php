@@ -103,14 +103,14 @@ class DB
 
 
     //  删除
-    protected function delete($_tables, $_deleteData)
+    protected function delete($_tables, Array $_param)
     {
-        $_isAnd = '';
-        foreach ($_deleteData as $_index => $_item) {
-            $_isAnd .= "$_index='$_item' AND ";
+        $_where = '';
+        foreach ($_param as $_index => $_item) {
+            $_where .= $_item.' AND ';
         }
-        $_isAnd = substr($_isAnd, 0, -4);
-        $_sql = "DELETE FROM $_tables[0] WHERE $_isAnd LIMIT 1";
+        $_where = 'WHERE ' . substr($_where, 0, -4);
+        $_sql = "DELETE FROM $_tables[0] WHERE $_where LIMIT 1";
         return $this->execute($_sql)->rowCount();
 
     }

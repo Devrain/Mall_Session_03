@@ -52,13 +52,12 @@ class Model extends DB
         return Request::getInstance($this, $this->_check);
     }
 
-    public function delete()
+    protected function delete(Array $_param)
     {
-        $_deleteData = $this->getRequest()->delete($this->_fields);
-        return $this->_db->delete($this->_tables, $_deleteData);
+        return $this->_db->delete($this->_tables, $_param);
     }
 
-    public function isOne($_OneData)
+    protected function isOne($_OneData)
     {
         return $this->_db->isOne($this->_tables, $_OneData);
     }

@@ -79,14 +79,25 @@ class Request
     }
 
     //  处理删除数据请求
-    public function delete($_fields)
+//    public function delete($_fields)
+//    {
+//        $_deleteData = array();
+//        if (Validate::isArray($_GET) && !Validate::isNullArray($_GET)) {
+//            $_deleteData = $this->selectData($_GET, $_fields);
+//            if (!$this->_check->oneCheck($this->_model, $_deleteData)) $this->check();
+//        }
+//        return $_deleteData;
+//    }
+
+
+    public function getParam(Array $_param)
     {
-        $_deleteData = array();
-        if (Validate::isArray($_GET) && !Validate::isNullArray($_GET)) {
-            $_deleteData = $this->selectData($_GET, $_fields);
-            if (!$this->_check->oneCheck($this->_model, $_deleteData)) $this->check();
+        $_getParam = array();
+        foreach ($_param as $_index => $_item) {
+            if ($_index == 'in') $_item = str_replace(',', "','", $_item);
+            $_getParam[] = Tool::setFormString($_item);
         }
-        return $_deleteData;
+        return $_getParam;
     }
 
     public function login()
