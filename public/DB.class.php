@@ -71,10 +71,11 @@ class DB
         $_isAnd = substr($_isAnd, 0, -4);
         $_setData = '';
         foreach ($_updateData as $_index => $_item) {
-            $_setData .= "$_index'$_item',";
+            $_setData .= "$_index='$_item',";
         }
         $_setData = substr($_setData, 0, -1);
         $_sql = "UPDATE $_tables[0] SET $_setData WHERE $_isAnd LIMIT 1";
+        echo $_sql;
         return $this->execute($_sql)->rowCount();
 
 

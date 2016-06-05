@@ -20,12 +20,13 @@ class NavModel extends Model
 
     public function findAll()
     {
-        return parent::select(array('id', 'name', 'info', 'sort'), array('limit' => $this->_limit, 'order' => 'sort ASC'));
+        return parent::select(array('id', 'name', 'info', 'sort'),
+            array('where' => array('sid' => $this->_sid), 'limit' => $this->_limit, 'order' => 'sort ASC'));
     }
 
     public function findOne()
     {
-        if (isset($_GET['dis'])) {
+        if (isset($_GET['sid'])) {
             return parent::select(array('id', 'name', 'info'), array('where' => array('id' => $this->_sid), 'limit' => '1'));
         }
         $_oneData = $this->getRequest()->one($this->_fields);
@@ -34,7 +35,7 @@ class NavModel extends Model
 
     public function total()
     {
-        return parent::total(array('where'=>array('sid'=>$this->_sid)));
+        return parent::total(array('where' => array('sid' => $this->_sid)));
     }
 
     public function add()
@@ -53,6 +54,7 @@ class NavModel extends Model
 
     public function sort()
     {
+
         foreach ($_POST['sort'] as $_index => $_item) {
             if (!is_numeric($_item)) continue;
             parent::update(array('id' => $_index), array('sort' => $_item));

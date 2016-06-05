@@ -11,13 +11,7 @@
 <div id="list">
     <form method="post" action="?a=nav&m=sort">
         <table>
-            <tr>
-                <th>名称</th>
-                <th>简介</th>
-                <th>子类</th>
-                <th>排序</th>
-                <th>操作</th>
-            </tr>
+            <tr><th>名称</th><th>简介</th><th>子类</th><th>排序</th><th>操作</th></tr>
             {foreach from=$AllNav key=index item=value}
                 <tr>
                     <td>{$value->name}</td>
@@ -26,7 +20,7 @@
                         <a href="?a=nav&sid={$value->id}">查看</a>
                         |
                         <a href="?a=nav&m=add&id={$value->id}">添加</a></td>
-                    <td>{$value->sort}</td>
+                    <td><input type="text" name="sort[{$value->sort}]" class="sort" value="{$value->sort}" id=""></td>
                     <td>
                         <a href="?a=nav&m=update&id={$value->id}">
                             <img src="view/admin/images/edit.gif" alt="编辑" title="编辑"/>
@@ -46,7 +40,7 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    <input type="submit" value="排序" name="send">
+                    <td><input type="submit" value="排序" name="send"></td>
                     <td></td>
                 </tr>
             {/if}
