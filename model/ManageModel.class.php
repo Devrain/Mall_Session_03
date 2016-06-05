@@ -25,6 +25,22 @@ class ManageModel extends Model
             array('where' => $_oneData, 'limit' => '1'));
     }
 
+    public function findLogin()
+    {
+        $this->_tables = array(DB_FREFIX . 'manage a', DB_FREFIX . 'level b');
+        return parent::select(array('a.user', 'b.level_name'),
+            array('where' => 'a.level=b.id AND a.user=' . "'{$_POST['user']}'", 'limit' => '1'));
+    }
+
+    public function countLogin()
+    {
+        $_oneData = array('user' => $_POST['user']);
+        $_updateData['login_count'] = array('login_count+1');
+        $_updateData['last_ip'] = Tool::getIP();
+        $_updateData['last_time'] = Tool::getDate();
+        parent::update($_oneData, $_updateData);
+    }
+
     public function total()
     {
         return parent::total();
@@ -59,6 +75,17 @@ class ManageModel extends Model
     public function login()
     {
         return $this->getRequest()->login();
+    }
+
+    //  ajax login
+    public function ajaxLogin()
+    {
+        $this->_check->ajaxLogin($this);
+    }
+
+    public function ajaxCode()
+    {
+        $this->_check->ajaxCode($this);
     }
 
 }

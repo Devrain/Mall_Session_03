@@ -89,7 +89,7 @@ class Request
         return $_deleteData;
     }
 
-    public function ligin()
+    public function login()
     {
         if (Validate::isArray($_POST) && !Validate::isNullArray($_POST)) {
             if (!$this->_check->loginCheck($this->_model, $_POST)) $this->check();

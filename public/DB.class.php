@@ -71,7 +71,13 @@ class DB
         $_isAnd = substr($_isAnd, 0, -4);
         $_setData = '';
         foreach ($_updateData as $_index => $_item) {
-            $_setData .= "$_index='$_item',";
+            if (Validate::isArray($_item)) {
+                $_setData .= "$_index=$_item[0],";
+            } else {
+                $_setData .= "$_index='$_item',";
+            }
+
+
         }
         $_setData = substr($_setData, 0, -1);
         $_sql = "UPDATE $_tables[0] SET $_setData WHERE $_isAnd LIMIT 1";
@@ -119,12 +125,12 @@ class DB
         if (Validate::isArray($_param) && !Validate::isNullArray($_param)) {
             $_limit = isset($_param['limit']) ? 'LIMIT ' . $_param['limit'] : '';
             $_order = isset($_param['order']) ? 'ORDER BY ' . $_param['order'] : '';
-            if (isset($_param['where'])&& Validate::isArray($_param['where'])) {
+            if (isset($_param['where']) && Validate::isArray($_param['where'])) {
                 foreach ($_param['where'] as $_index => $_item) {
                     $_isAnd .= "$_index='$_item' AND ";
                 }
                 $_where = ' WHERE ' . substr($_isAnd, 0, -4);
-            }elseif (isset($_param['where'])) {
+            } elseif (isset($_param['where'])) {
                 $_where = ' WHERE ' . $_param['where'];
             }
         }
@@ -141,7 +147,7 @@ class DB
 
 
     //  总记录
-    protected function total($_tables,$_param=array())
+    protected function total($_tables, $_param = array())
     {
         $_where = '';
         if (isset($_param['where'])) {

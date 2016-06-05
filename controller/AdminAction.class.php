@@ -23,7 +23,7 @@ class AdminAction extends Action
         if (isset($_SESSION['admin'])) {
             $this->_tpl->assign('admin', $_SESSION['admin']);
             $this->_tpl->display(SMARTY_ADMIN . 'public/admin.tpl');
-        }else {
+        } else {
             $this->_redirect->succ('?a=admin&m=login');
         }
 
@@ -40,10 +40,32 @@ class AdminAction extends Action
     public function login()
     {
         if (isset($_POST['send'])) {
-            $_SESSION['admin']['user'] = 'lee';
-            $_SESSION['admin']['level'] = '订单处理专员';
-            if ($this->_manage->login()) $this->_redirect->succ('?a=admin', '后台登陆成功');
+            if ($this->_manage->login()) {
+                $_login = $this->_manage->findLogin();
+                $_SESSION['admin']['user'] = $_login[0]->user;
+                $_SESSION['admin']['level'] = $_login[0]->level_name;
+                $this->_manage->countLogin();
+                $this->_redirect->succ('?a=admin', '后台登陆成功');
+            }
         }
         $this->_tpl->display(SMARTY_ADMIN . 'public/login.tpl');
+    }
+
+    //  后台推出
+    public function logout()
+    {
+        if (isset($_SESSION['admin'])) session_destroy();
+        $this->_redirect->succ('?a=admin&m=login');
+    }
+
+    //  ajax login
+    public function ajaxLogin()
+    {
+        $this->_manage->ajaxLogin();
+    }
+
+    public function ajaxCode()
+    {
+        $this->_manage->ajaxCode();
     }
 }
