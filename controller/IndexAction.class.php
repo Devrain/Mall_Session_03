@@ -20,7 +20,13 @@ class IndexAction extends Action
         $this->_tpl->display(SMARTY_FRONT . 'public/index.tpl');
     }
 
-
+    //  验证码
+    public function validateCode()
+    {
+        $_vc = new ValidateCode();
+        $_vc->doimg();
+        $_SESSION['code'] = $_vc->getCode();
+    }
 
 
 }
