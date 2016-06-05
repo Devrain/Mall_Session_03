@@ -73,7 +73,7 @@ class Request
         $_oneDate = array();
         if (Validate::isArray($_GET) && !Validate::isNullArray($_GET)) {
             $_oneDate = $this->selectData($_GET, $_fields);
-            if (!$this->_check->oneCheck($this->_model,$_oneDate)) $this->check();
+            if (!$this->_check->oneCheck($this->_model, $_oneDate)) $this->check();
         }
         return $_oneDate;
     }
@@ -87,6 +87,13 @@ class Request
             if (!$this->_check->oneCheck($this->_model, $_deleteData)) $this->check();
         }
         return $_deleteData;
+    }
+
+    public function ligin()
+    {
+        if (Validate::isArray($_POST) && !Validate::isNullArray($_POST)) {
+            if (!$this->_check->loginCheck($this->_model, $_POST)) $this->check();
+        }
     }
 
     /**

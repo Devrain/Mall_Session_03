@@ -12,7 +12,7 @@
 </head>
 <body>
 <div id="header">
-    <p>您好，admin【超級管理員】【去首頁】【退出】</p>
+    <p>您好，{$admin.user}[{$admin.level}]【去首頁】【退出】</p>
     <ul>
         <li class="first"><a href="?a=admin&m=main" target="in">起始頁</a></li>
         <li><a href="javascript:channel(0)" )>商品</a></li>

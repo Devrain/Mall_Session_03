@@ -5,7 +5,7 @@
  * Date: 2016/6/1
  * Time: 22:42
  */
-
+session_start();
 
 //  smarty配置文件  樣式替換
 define('SMARTY_FRONT', 'default/'); //  前臺皮膚

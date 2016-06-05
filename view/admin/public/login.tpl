@@ -6,11 +6,11 @@
 </head>
 <body>
 <div id="login">
-    <form action="?a=admin&m=login" method="post">
+    <form action="?a=admin&m=login" method="post" name="login">
         <dl>
             <dd>管理员姓名：<input type="text" name="user" class="text"></dd>
             <dd>管理员密码：<input type="password" name="pass"  class="text"></dd>
-            <dd>验证：<input type="text" name="code" id="" class="text"></dd>
+            <dd>验证：<input type="text" name="code" style="text-transform: uppercase;" id="" class="text"></dd>
             <dd class="code">
                 <img src="?a=index&m=valiudateCode" alt="看不清，点击刷新" title="看不清，点击刷新" onclick="javascript:this.src='?a=index&m=validateCode&tm='+Math.random()"/>
             </dd>
