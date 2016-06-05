@@ -49,17 +49,17 @@ class ManageCheck extends Check
         return $this->_flag;
     }
 
-    public function updateCheck(&$_model, $_requestData)
+    public function updateCheck(Model &$_model, Array $_param)
     {
-        if (self::checkStrLength($_requestData['pass'], 6, 'min')) {
+        if (self::checkStrLength($_param['pass'], 6, 'min')) {
             $this->_message[] = '管理员密码不得小于6位';
             $this->_flag = false;
         }
-        if (!self::checkStrEquals($_requestData['pass'], $_requestData['notpass'])) {
+        if (!self::checkStrEquals($_param['pass'], $_param['notpass'])) {
             $this->_message[] = '管理员密码和确认密码不一致';
             $this->_flag = false;
         }
-        if (self::isNullString($_requestData['level'])) {
+        if (self::isNullString($_param['level'])) {
             $this->_message[] = '管理员等级权限必须选择！';
             $this->_flag = false;
         }
@@ -82,25 +82,25 @@ class ManageCheck extends Check
         echo !self::checkStrEquals(strtoupper($_SESSION['code']), strtoupper($_POST['code'])) ? 1 : 2;
     }
 
-    public function loginCheck(&$_model, $_requestData)
+    public function loginCheck(Model &$_model,Array $_param,Array $_whereParam)
     {
-        if (self::isNullString($_requestData['user'])) {
+        if (self::isNullString($_param['user'])) {
             $this->_message[] = '管理员姓名不得为空！';
             $this->_flag = false;
         }
-        if (self::isNullString($_requestData['pass'])) {
+        if (self::isNullString($_param['pass'])) {
             $this->_message[] = '管理员密码不得为空！';
             $this->_flag = false;
         }
-        if (self::isNullString($_requestData['code'])) {
+        if (self::isNullString($_param['code'])) {
             $this->_message[] = '验证码不得为空！';
             $this->_flag = false;
         }
-        if (!self::checkStrEquals(strtoupper($_SESSION['code']), strtoupper($_requestData['code']))) {
+        if (!self::checkStrEquals(strtoupper($_SESSION['code']), strtoupper($_param['code']))) {
             $this->_message[] = '验证码不正确！';
             $this->_flag = false;
         }
-        if (!$_model->isOne(array('user' => $_requestData['user'], 'pass' => sha1($_requestData['pass'])))) {
+        if (!$_model->isOne($_whereParam)) {
             $this->_message[] = '用户名或密码不正确！';
             $this->_flag = false;
         }

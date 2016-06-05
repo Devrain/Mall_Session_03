@@ -62,13 +62,13 @@ class DB
     }
 
 
-    protected function update($_tables, $_oneData, $_updateData)
+    protected function update($_tables, Array  $_param, Array  $_updateData)
     {
-        $_isAnd = '';
-        foreach ($_oneData as $_index => $_item) {
-            $_isAnd .= "$_index='$_item' AND ";
+        $_where = $_setDate = '';
+        foreach ($_param as $_index => $_item) {
+            $_where .= $_item . ' AND ';
         }
-        $_isAnd = substr($_isAnd, 0, -4);
+        $_where = 'WHERE ' . substr($_where, 0, -4);
         $_setData = '';
         foreach ($_updateData as $_index => $_item) {
             if (Validate::isArray($_item)) {
@@ -80,7 +80,7 @@ class DB
 
         }
         $_setData = substr($_setData, 0, -1);
-        $_sql = "UPDATE $_tables[0] SET $_setData WHERE $_isAnd LIMIT 1";
+        $_sql = "UPDATE $_tables[0] SET $_setData  $_where LIMIT 1";
         echo $_sql;
         return $this->execute($_sql)->rowCount();
 
@@ -88,14 +88,14 @@ class DB
     }
 
     //  验证一条数据
-    protected function isOne($_tables, $_isOneData)
+    protected function isOne($_tables, Array $_param)
     {
-        $_isAnd = '';
-        foreach ($_isOneData as $_index => $_item) {
-            $_isAnd .= "$_index='$_item' AND ";
+        $_where = '';
+        foreach ($_param as $_index => $_item) {
+            $_where .= $_item . ' AND ';
         }
-        $_isAnd = substr($_isAnd, 0, -4);
-        $_sql = "SELECT id FROM $_tables[0] WHERE $_isAnd LIMIT 1";
+        $_where = 'WHEARE ' . substr($_where, 0, -4);
+        $_sql = "SELECT id FROM $_tables[0]  $_where LIMIT 1";
         return $this->execute($_sql)->rowCount();
 
 
@@ -107,7 +107,7 @@ class DB
     {
         $_where = '';
         foreach ($_param as $_index => $_item) {
-            $_where .= $_item.' AND ';
+            $_where .= $_item . ' AND ';
         }
         $_where = 'WHERE ' . substr($_where, 0, -4);
         $_sql = "DELETE FROM $_tables[0] WHERE $_where LIMIT 1";
@@ -117,22 +117,22 @@ class DB
 
 
     //  查询
-    protected function select($_tables, $_field, $_param = array())
+    protected function select($_tables, Array  $_field, Array $_param = array())
     {
-        $_limit = $_order = $_where = $_isAnd = '';
+        $_limit = $_order = $_where =  '';
 
 
         if (Validate::isArray($_param) && !Validate::isNullArray($_param)) {
             $_limit = isset($_param['limit']) ? 'LIMIT ' . $_param['limit'] : '';
             $_order = isset($_param['order']) ? 'ORDER BY ' . $_param['order'] : '';
-            if (isset($_param['where']) && Validate::isArray($_param['where'])) {
+            if (isset($_param['where'])) {
                 foreach ($_param['where'] as $_index => $_item) {
-                    $_isAnd .= "$_index='$_item' AND ";
+                    $_where .= $_item . ' AND ';
                 }
-                $_where = ' WHERE ' . substr($_isAnd, 0, -4);
-            } elseif (isset($_param['where'])) {
-                $_where = ' WHERE ' . $_param['where'];
-            }
+                $_where = 'WHERE ' . substr($_where, 0, -4);
+            } 
+
+
         }
         $_selectFields = implode(',', $_field);
         $_table = isset($_tables[1]) ? ($_tables[0] . ',' . $_tables[1]) : $_tables[0];

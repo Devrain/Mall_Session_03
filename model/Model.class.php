@@ -26,13 +26,13 @@ class Model extends DB
         return $this->_db->add($this->_tables, $_addData);
     }
 
-    protected function update($_oneData, $_updateData)
+    protected function update(Array $_param,Array $_updateData)
     {
-        return $this->_db->update($this->_tables, $_oneData, $_updateData);
+        return $this->_db->update($this->_tables, $_param, $_updateData);
     }
 
 
-    protected function select($_field, $_param = array())
+    protected function select(Array $_field,Array  $_param = array())
     {
         return $this->_db->select($this->_tables, $_field, $_param);
     }
@@ -57,9 +57,9 @@ class Model extends DB
         return $this->_db->delete($this->_tables, $_param);
     }
 
-    protected function isOne($_OneData)
+    protected function isOne(Array $_param)
     {
-        return $this->_db->isOne($this->_tables, $_OneData);
+        return $this->_db->isOne($this->_tables, $_param);
     }
 
 

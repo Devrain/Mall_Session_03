@@ -68,14 +68,9 @@ class Request
     }
 
 
-    public function one($_fields)
+    public function one(Array $_param)
     {
-        $_oneDate = array();
-        if (Validate::isArray($_GET) && !Validate::isNullArray($_GET)) {
-            $_oneDate = $this->selectData($_GET, $_fields);
-            if (!$this->_check->oneCheck($this->_model, $_oneDate)) $this->check();
-        }
-        return $_oneDate;
+        if (!$this->_check->oneCheck($this->_model,$_param)) $this->check();
     }
 
     //  处理删除数据请求
@@ -100,11 +95,12 @@ class Request
         return $_getParam;
     }
 
-    public function login()
+    public function login(Array $_param)
     {
-        if (Validate::isArray($_POST) && !Validate::isNullArray($_POST)) {
-            if (!$this->_check->loginCheck($this->_model, $_POST)) $this->check();
+        if (Validate::isArray($_POST)&&!Validate::isNullArray($_POST)) {
+            if (!$this->_check->loginCheck($this->_model,$_POST,$_param)) $this->check();
         }
+        return true;
     }
 
     /**

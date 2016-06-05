@@ -20,25 +20,29 @@ class ManageModel extends Model
 
     public function findOne()
     {
-        $_oneData = $this->getRequest()->one($this->_fields);
+        list($_id) = $this->getRequest()->getParam(array($_GET['id']));
+        $_where = array("id='$_id'");
+        $this->getRequest()->one($_where);
         return parent::select(array('id', 'user', 'level'),
-            array('where' => $_oneData, 'limit' => '1'));
+            array('where' => $_where, 'limit' => '1'));
     }
 
     public function findLogin()
     {
+        list($_user) = $this->getRequest()->getParam(array($_POST['user']));
         $this->_tables = array(DB_FREFIX . 'manage a', DB_FREFIX . 'level b');
         return parent::select(array('a.user', 'b.level_name'),
-            array('where' => 'a.level=b.id AND a.user=' . "'{$_POST['user']}'", 'limit' => '1'));
+            array('where' => array('a.level=b.id', "user='$_user'"), 'limit' => '1'));
     }
 
     public function countLogin()
     {
-        $_oneData = array('user' => $_POST['user']);
+        list($_user) = $this->getRequest()->getParam(array($_POST['user']));
+        $_where = array("user='$_user'");
         $_updateData['login_count'] = array('login_count+1');
         $_updateData['last_ip'] = Tool::getIP();
         $_updateData['last_time'] = Tool::getDate();
-        parent::update($_oneData, $_updateData);
+        parent::update($_where, $_updateData);
     }
 
     public function total()
@@ -64,17 +68,19 @@ class ManageModel extends Model
         return parent::delete($_where);
     }
 
-    public function isOne($_oneData)
+    public function isOne(Array $_param)
     {
-        return parent::isOne($_oneData);
+        return parent::isOne($_param);
     }
 
     public function update()
     {
-        $_oneData = $this->getRequest()->one($this->_fields);
+        list($_id) = $this->getRequest()->getParam(array($_GET['id']));
+        $_where = array("id='$_id'");
+        $this->getRequest()->one($_where);
         $_updateData = $this->getRequest()->update($this->_fields);
         $_updateData['pass'] = sha1($_updateData['pass']);
-        return parent::update($_oneData, $_updateData);
+        return parent::update($_where, $_updateData);
 
     }
 
@@ -86,7 +92,9 @@ class ManageModel extends Model
 
     public function login()
     {
-        return $this->getRequest()->login();
+        list($_user, $_pass) = $this->getRequest()->getParam(array($_POST['user'], $_POST['pass']));
+        $_where = array("user='$_user'", "pass='" . sha1($_pass) . "'");
+        return $this->getRequest()->login($_where);
     }
 
     //  ajax login
