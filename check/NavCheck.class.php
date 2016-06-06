@@ -33,6 +33,16 @@ class NavCheck extends Check
         return $this->_flag;
     }
 
+    public function updateCheck(&$_model, $_requestData)
+    {
+        if (self::checkStrLength($_requestData['info'],200,'max')) {
+            $this->_message[] = '导航简介不得大于200';
+            $this->_flag = false;
+        }
+        return $this->_flag;
+        
+    }
+
     public function ajax(Model &$_model, Array $_param)
     {
         echo $_model->isOne($_param) ? 1 : 2;

@@ -28,4 +28,4 @@ define('DB_FREFIX', 'mall_');
 
 
 //  系统参数设置
-define('PAGE_SIZE', 20);
+define('PAGE_SIZE', 5);

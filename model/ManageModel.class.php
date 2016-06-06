@@ -15,7 +15,7 @@ class ManageModel extends Model
             $this->_R['pass'],
             $this->_R['code']
             ) = $this->getRequest()->getParam(array(
-            isset($_GET['id']) ? $_GET[id] : null,
+            isset($_GET['id']) ? $_GET['id'] : null,
             isset($_POST['user']) ? $_POST['user'] : null,
             isset($_POST['pass']) ? $_POST['pass'] : null,
             isset($_POST['code']) ? $_POST['code'] : null
@@ -26,7 +26,7 @@ class ManageModel extends Model
     {
         $this->_tables = array(DB_FREFIX . 'manage a', DB_FREFIX . 'level b');
         return parent::select(array('a.id', 'a.user', 'a.level', 'a.login_count', 'a.last_ip', 'a.last_time', 'b.level_name'),
-            array('where' => 'a.level=b.id', 'limit' => $this->_limit, 'order' => 'a.reg_time DESC'));
+            array('where' => array('a.level=b.id'), 'limit' => $this->_limit, 'order' => 'a.reg_time DESC'));
     }
 
     public function findOne()
@@ -84,6 +84,7 @@ class ManageModel extends Model
         $_where = array("id='{$this->_R['id']}'");
         $this->getRequest()->one($_where);
         $_updateData = $this->getRequest()->update($this->_fields);
+        print_r($_updateData);
         $_updateData['pass'] = sha1($_updateData['pass']);
         return parent::update($_where, $_updateData);
 

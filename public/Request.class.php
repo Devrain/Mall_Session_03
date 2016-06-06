@@ -65,7 +65,7 @@ class Request
         if (Validate::isArray($_POST) && !Validate::isNullArray($_POST)) {
             $_requestData = Tool::setFormString($_POST);
             if (!$this->_check->updateCheck($this->_model, $_requestData)) $this->check();
-            $_requestData = $this->selectData($_requestData, $_fields);
+            $_updateData = $this->selectData($_requestData, $_fields);
         }
         return $_updateData;
     }

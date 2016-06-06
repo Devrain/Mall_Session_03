@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="WEB_MODULE" version="4">
   <component name="CompassSettings">
-    <option name="compassConfigPath" value="$MODULE_DIR$/view/admin/sass/config.rb" />
     <option name="compassExecutableFilePath" value="D:/Ruby23-x64/bin/compass.bat" />
   </component>
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/smarty" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/view/admin/sass" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/.idea" />
       <excludeFolder url="file://$MODULE_DIR$/cache" />

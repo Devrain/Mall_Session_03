@@ -81,7 +81,6 @@ class DB
         }
         $_setData = substr($_setData, 0, -1);
         $_sql = "UPDATE $_tables[0] SET $_setData  $_where LIMIT 1";
-        echo $_sql;
         return $this->execute($_sql)->rowCount();
 
 
@@ -94,7 +93,7 @@ class DB
         foreach ($_param as $_index => $_item) {
             $_where .= $_item . ' AND ';
         }
-        $_where = 'WHEARE ' . substr($_where, 0, -4);
+        $_where = 'WHERE ' . substr($_where, 0, -4);
         $_sql = "SELECT id FROM $_tables[0]  $_where LIMIT 1";
         return $this->execute($_sql)->rowCount();
 
@@ -110,7 +109,7 @@ class DB
             $_where .= $_item . ' AND ';
         }
         $_where = 'WHERE ' . substr($_where, 0, -4);
-        $_sql = "DELETE FROM $_tables[0] WHERE $_where LIMIT 1";
+        $_sql = "DELETE FROM $_tables[0]  $_where LIMIT 1";
         return $this->execute($_sql)->rowCount();
 
     }
