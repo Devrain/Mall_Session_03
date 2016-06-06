@@ -75,6 +75,14 @@ class Tool
         return $_items;
     }
 
+    //  过滤
+    static public function setRequest()
+    {
+        if (isset($_GET)) $_GET = Tool::setFormString($_GET);
+        if (isset($_POST)) $_POST = Tool::setFormString($_POST);
+    }
+
+
     //  获取上一页
     static public function getPrevPage()
     {

@@ -41,20 +41,20 @@ class Request
     }
 
     //  私有構造
+    /**
+     * Request constructor.
+     */
     private function __construct()
     {
-
+        Tool::setRequest();
     }
 
     //  處理新增數據請求
-    public function add(Array $_fields, Array $_param = array())
+    public function add(Array $_fields)
     {
         $_addData = array();
         if (Validate::isArray($_POST) && !Validate::isNullArray($_POST)) {
-            $_requestData = Tool::setFormString($_POST);
-            if (!$this->_check->addCheck($this->_model, $_requestData, $_param)) $this->_check;
-            $_addData = $this->selectData($_requestData, $_fields);
-
+            $_addData = $this->selectData($_POST, $_fields);
         }
         return $_addData;
     }
@@ -63,9 +63,8 @@ class Request
     {
         $_updateData = array();
         if (Validate::isArray($_POST) && !Validate::isNullArray($_POST)) {
-            $_requestData = Tool::setFormString($_POST);
-            if (!$this->_check->updateCheck($this->_model, $_requestData)) $this->check();
-            $_updateData = $this->selectData($_requestData, $_fields);
+            if (!$this->_check->updateCheck($this->_model, $_POST)) $this->check();
+            $_updateData = $this->selectData($_POST, $_fields);
         }
         return $_updateData;
     }
@@ -76,35 +75,17 @@ class Request
         if (!$this->_check->oneCheck($this->_model, $_param)) $this->check();
     }
 
-    //  处理删除数据请求
-//    public function delete($_fields)
-//    {
-//        $_deleteData = array();
-//        if (Validate::isArray($_GET) && !Validate::isNullArray($_GET)) {
-//            $_deleteData = $this->selectData($_GET, $_fields);
-//            if (!$this->_check->oneCheck($this->_model, $_deleteData)) $this->check();
-//        }
-//        return $_deleteData;
-//    }
-
 
     public function getParam(Array $_param)
     {
         $_getParam = array();
         foreach ($_param as $_index => $_item) {
             if ($_index == 'in') $_item = str_replace(',', "','", $_item);
-            $_getParam[] = Tool::setFormString($_item);
+            $_getParam[] = $_item;
         }
         return $_getParam;
     }
 
-    public function login(Array $_param)
-    {
-        if (Validate::isArray($_POST) && !Validate::isNullArray($_POST)) {
-            if (!$this->_check->loginCheck($this->_model, $_POST, $_param)) $this->check();
-        }
-        return true;
-    }
 
     /**
      * @param $_GET
@@ -121,15 +102,7 @@ class Request
         return $_selectData;
     }
 
-    private function check()
-    {
-        $this->_tpl->assign('message', $this->_check->getMessage());
-        $this->_tpl->assign('prev', Tool::getPrevPage());
-        $this->_tpl->display(SMARTY_ADMIN . 'public/error.tpl');
-        exit();
-    }
 
-    //  验证数据的合法性
 
 }
 

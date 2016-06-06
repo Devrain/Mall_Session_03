@@ -32,7 +32,7 @@ class ManageModel extends Model
     public function findOne()
     {
         $_where = array("id='{$this->_R['id']}'");
-        $this->getRequest()->one($_where);
+        if (!$this->_check->oneCheck($this, $_where)) $this->_check->error();
         return parent::select(array('id', 'user', 'level'),
             array('where' => $_where, 'limit' => '1'));
     }
@@ -62,7 +62,8 @@ class ManageModel extends Model
     public function add()
     {
         $_where = array("user='{$this->_R['user']}'");
-        $_addData = $this->getRequest()->add($this->_fields,$_where);
+        if (!$this->_check->addCheck($this, $_where)) $this->_check->error();
+        $_addData = $this->getRequest()->add($this->_fields, $_where);
         $_addData['pass'] = sha1($_addData['pass']);
         $_addData['last_ip'] = Tool::getIP();
         $_addData['reg_time'] = Tool::getDate();
@@ -78,11 +79,11 @@ class ManageModel extends Model
     }
 
 
-
     public function update()
     {
         $_where = array("id='{$this->_R['id']}'");
-        $this->getRequest()->one($_where);
+        if (!$this->_check->oneCheck($this, $_where)) $this->_check->error();
+        if (!$this->_check->updateCheck($this)) $this->_check->error();
         $_updateData = $this->getRequest()->update($this->_fields);
         print_r($_updateData);
         $_updateData['pass'] = sha1($_updateData['pass']);
@@ -94,25 +95,30 @@ class ManageModel extends Model
     public function isUser()
     {
         $_where = array("user=''{$this->_R['user']}");
-        $this->_check->ajax($this,$_where);
+        $this->_check->ajax($this, $_where);
     }
 
     public function login()
     {
         $_where = array("user='{$this->_R['user']}'", "pass='" . sha1($this->_R['pass']) . "'");
-        return $this->getRequest()->login($_where);
+        if (!$this->_check->loginCheck($this, $_where)) {
+            $this->_check->error();
+        } else {
+            return true;
+        }
+
     }
 
     //  ajax login
     public function ajaxLogin()
     {
         $_where = array("user='{$this->_R['user']}'", "pass='" . sha1($this->_R['pass']) . "'");
-        $this->_check->ajaxLogin($this,$_where);
+        $this->_check->ajaxLogin($this, $_where);
     }
 
     public function ajaxCode()
     {
-        $this->_check->ajaxCode($this,$this->_R['code']);
+        $this->_check->ajaxCode($this, $this->_R['code']);
     }
 
 }

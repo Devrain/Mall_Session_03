@@ -39,6 +39,7 @@ class NavModel extends Model
             return parent::select(array('id', 'name', 'info'), array('where' => array("id='{$this->_R['sid']}'"), 'limit' => '1'));
         }
         $_where = array("id='{$this->_R['id']}'");
+        if (!$this->_check->oneCheck($this,$_where)) $this->_check->error();
         $this->getRequest()->one($_where);
         return parent::select(array('id', 'name', 'info'), array('where' => $_where, 'limit' => '1'));
     }
@@ -51,6 +52,7 @@ class NavModel extends Model
     public function add()
     {
         $_where = array("name='{$this->_R['name']}'");
+        if (!$this->_check->addCheck($this,$_where)) $this->_check->error();
         $_addData = $this->getRequest()->add($this->_fields, $_where);
         $_addData['sort'] = $this->nextId();
         return parent::add($_addData);
@@ -66,6 +68,8 @@ class NavModel extends Model
     public function update()
     {
         $_where = array("id='{$this->_R['id']}'");
+        if (!$this->_check->oneCheck($this,$_where)) $this->_check->error();
+        if (!$this->_check->updateCheck($this)) $this->_check->error();
         $_updateData = $this->getRequest()->update($this->_fields, $_where);
         return parent::update($_where, $_updateData);
     }

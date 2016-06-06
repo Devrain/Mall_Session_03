@@ -11,15 +11,22 @@ class Check extends Validate
     //  判断验证是否通过
     protected $_flag = true;
 
-//  错误消息集
+    //  错误消息集
     protected $_message = array();
 
+    //  模板对象
+    private $_tpl = null;
 
-
-    public function getMessage()
+    /**
+     * Check constructor.
+     * @param null $_tpl
+     */
+    public function __construct()
     {
-        return $this->_message;
+        $this->_tpl = TPL::getInstance();
     }
+
+
 
     public function oneCheck(Model &$_model, Array $_param)
     {
@@ -29,4 +36,29 @@ class Check extends Validate
         }
         return $this->_flag;
     }
+
+    //  验证数据合法性
+    public function error()
+    {
+        $this->_tpl->assign('message', $this->_message);
+        $this->_tpl->assign('prev', Tool::getPrevPage());
+        $this->_tpl->display(SMARTY_ADMIN . 'public/error.tpl');
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
