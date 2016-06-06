@@ -1,0 +1,74 @@
+@charset "UTF-8";
+$while: #fff;
+$cyanine: #026acb;
+$width-996: 996px;
+$height-60: 60px;
+$cyan: #5cb4e6;
+
+body, p, form, h1, h2, h3, ul, li, dl, dt, dd {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-size: 12px;
+    background: $while;
+    width: $width-996;
+    margin: 0 auto;
+
+}
+
+ul {
+    list-style-type: none;
+}
+
+#header {
+    height: $height-60;
+    margin: 0 0 10px 0;
+    h1 {
+        width: 200px;
+        height: $height-60;
+        background: url("../images/logo.png") no-repeat left center;
+        text-indent: -9999px;
+        font-size: 12px;
+        a {
+            width: 200px;
+            height: 60px;
+            display: block;
+        }
+    }
+}
+
+#nav {
+    height: 26px;
+    padding: 0 0 0 30px;
+    ul {
+        height: 26px;
+        li {
+            height: 26px;
+            width: 82px;
+            float: left;
+            display: block;
+            a {
+                color: $cyanine;
+                text-decoration: none;
+                text-align: center;
+                display: block;
+                height: 26px;
+                width: 78px;
+                line-height: 26px;
+                background: url("../images/nav_bg.png") no-repeat left center;
+                &:hover {
+                    background-position: right;
+                    color: $while;
+                }
+            }
+        }
+    }
+}
+
+#search {
+    height: 36px;
+    border: 1px solid $cyan;
+    background: url("../images/search_bgline.png");
+}

@@ -27,6 +27,11 @@ class NavModel extends Model
 
     }
 
+    public function findFrontTenNav()
+    {
+        return parent::select(array('id', 'name'), array('where' => array('sid=0'), 'limit' => '10', 'order' => 'sort ASC'));
+    }
+
     public function findAll()
     {
         return parent::select(array('id', 'name', 'info', 'sort'),
@@ -53,7 +58,7 @@ class NavModel extends Model
     {
         $_where = array("name='{$this->_R['name']}'");
         if (!$this->_check->addCheck($this,$_where)) $this->_check->error();
-        $_addData = $this->getRequest()->add($this->_fields, $_where);
+        $_addData = $this->getRequest()->filter($this->_fields, $_where);
         $_addData['sort'] = $this->nextId();
         return parent::add($_addData);
     }
@@ -70,7 +75,7 @@ class NavModel extends Model
         $_where = array("id='{$this->_R['id']}'");
         if (!$this->_check->oneCheck($this,$_where)) $this->_check->error();
         if (!$this->_check->updateCheck($this)) $this->_check->error();
-        $_updateData = $this->getRequest()->update($this->_fields, $_where);
+        $_updateData = $this->getRequest()->filter($this->_fields, $_where);
         return parent::update($_where, $_updateData);
     }
 

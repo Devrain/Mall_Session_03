@@ -63,7 +63,7 @@ class ManageModel extends Model
     {
         $_where = array("user='{$this->_R['user']}'");
         if (!$this->_check->addCheck($this, $_where)) $this->_check->error();
-        $_addData = $this->getRequest()->add($this->_fields, $_where);
+        $_addData = $this->getRequest()->filter($this->_fields, $_where);
         $_addData['pass'] = sha1($_addData['pass']);
         $_addData['last_ip'] = Tool::getIP();
         $_addData['reg_time'] = Tool::getDate();
@@ -84,7 +84,7 @@ class ManageModel extends Model
         $_where = array("id='{$this->_R['id']}'");
         if (!$this->_check->oneCheck($this, $_where)) $this->_check->error();
         if (!$this->_check->updateCheck($this)) $this->_check->error();
-        $_updateData = $this->getRequest()->update($this->_fields);
+        $_updateData = $this->getRequest()->filter($this->_fields);
         print_r($_updateData);
         $_updateData['pass'] = sha1($_updateData['pass']);
         return parent::update($_where, $_updateData);
